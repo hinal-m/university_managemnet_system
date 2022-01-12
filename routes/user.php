@@ -42,4 +42,10 @@ Route::group(['middleware' => 'auth:user'], function () {
     Route::get('/profile/{id}',      [DashboardController::class, 'showProfile'])->name('profile');
     Route::post('/edit-profile',      [DashboardController::class, 'editProfile'])->name('edit_profile');
 
+    //addminssion
+    Route::resource('addmission','AddmissionController');
+
+    //student marks
+    Route::resource('marks','StudentMarkController');
+
 });

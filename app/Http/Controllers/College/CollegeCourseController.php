@@ -4,6 +4,7 @@ namespace App\Http\Controllers\College;
 
 use App\DataTables\CollegeCourseDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\College\CollegeCourseRequest;
 use App\Models\CollegeCourse;
 use App\Models\Course;
 use App\Repositories\CollegeCourseRepository;
@@ -33,35 +34,18 @@ class CollegeCourseController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(CollegeCourseRequest $request)
     {
         $college_course = $this->college_course->store($request->all());
         return response()->json(['data' => $college_course]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         // dd($id);
@@ -71,27 +55,15 @@ class CollegeCourseController extends Controller
         return view('College.Course.edit', compact('college_course','course'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $college_course = $this->college_course->update($request->all());
         return response()->json(['data' => $college_course]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $college_course = $this->college_course->delete($request->all());
+        return response()->json(['data' => $college_course]);
     }
 }

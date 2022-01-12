@@ -98,5 +98,13 @@
                     <span class="menu-title">Course</span>
                 </a>
             </li>
+            <li class="nav-item menu-items {{ request()->is('*course-list*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('university.marit.index')}}">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-speedometer"></i>
+                    </span>
+                    <span class="menu-title">MArit Round</span>
+                </a>
+            </li>
     </ul>
 </nav>

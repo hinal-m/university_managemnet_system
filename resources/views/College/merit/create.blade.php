@@ -2,7 +2,7 @@
 @section('title', 'Courses')
 
 @section('content')
-
+    {{-- @dd($college_merit['merit_round']) --}}
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="row">
@@ -21,31 +21,31 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form id="submit_form" action="{{ route('college.course.store') }}" method="post"
+                                <form id="submit_form" action="{{ route('college.merit.store') }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="form-group mb-2">
                                         <label for="basic-form-6">Courses</label>
-                                        <select id="course_id" name="course_id" class="form-control">
+                                        <select id="course_id" name="course_id" class="form-control course">
                                             <option value="" selected disabled>Select Course</option>
-                                            @foreach ($college_course as $value)
-                                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                            @foreach ($college_merit['college_course'] as $value)
+                                                <option value="{{ $value->Course->id }}">{{ $value->Course->name }}</option>
                                             @endforeach
                                         </select>
 
                                     </div>
-                                    <div class="form-group mb-2">
-                                        <label for="reserved_seat">Reserved Seat</label>
-                                        <input type="text" id="reserved_seat" class="form-control"
-                                            data-validation-required-message="This First Name field is required"
-                                            name="reserved_seat">
+                                    <div class="form-group mb-2 " >
+                                        <label for="reserved_seat">Select Round</label>
+                                                  <select name="round_no" id="round_no" class="form-control round">
+                                                      <option value="">Select round</option>
+                                                  </select>
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="seat_no">Merit No</label>
-                                        <input type="text" id="merit_seat" class="form-control"
+                                        <label for="seat_no">Merit</label>
+                                        <input type="text" id="merit" class="form-control"
                                             data-validation-required-message="This First Name field is required"
-                                            name="merit_seat">
+                                            name="merit">
                                     </div>
 
 
@@ -68,17 +68,40 @@
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
+            $(document).on('change', '.course', function() {
+                var id = $(this).val();
+                alert(id);
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
+                            .attr('content')
+                    },
+                    type: 'POST',
+                    url: "{{ route('college.round') }}",
+                    data: {
+                        'id': id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        var htm='';
+                        htm+='<option >Select Round</option>';
+                        $.each(data.data,function(key,val){
+                            htm+='<option value='+val['round_no']+'>Round No: '+val['round_no']+'</option>'
+                        })
+                        $('.round').html(htm);
+                    }
+                });
+            });
             $(document).ready(function() {
                 $('#submit_form').validate({
                     rules: {
                         course_id: {
                             required: true,
                         },
-                        reserved_seat: {
+                        round_no: {
                             required: true,
-                            digits: true
                         },
-                        merit_seat: {
+                        merit: {
                             required: true,
                             digits: true
                         },
@@ -88,11 +111,11 @@
                         'course_id': {
                             'required': 'Please Select Course'
                         },
-                        'reserved_seat': {
-                            'required': 'Please Enter Reserved seat'
+                        'round_no': {
+                            'required': 'Please Select Round No'
                         },
-                        'merit_seat': {
-                            'required': 'Please Enter Merit Seat'
+                        'merit': {
+                            'required': 'Please Enter Merit'
                         },
                     },
                     highlight: function(element, errorClass, validClass) {
@@ -115,7 +138,7 @@
                 var formData = new FormData(form[0]);
                 swal({
                     title: "Are you sure?",
-                    text: "you want to Insert Course",
+                    text: "you want to Insert College Merit",
                 }).then((result) => {
                     if (result) {
                         $.ajax({
@@ -124,7 +147,7 @@
                                     .attr('content')
                             },
                             type: 'POST',
-                            url: "{{ route('college.course.store') }}",
+                            url: "{{ route('college.merit.store') }}",
                             data: formData,
                             dataType: 'JSON',
                             contentType: false,
@@ -133,10 +156,10 @@
                             success: function(query) {
                                 if (query) {
                                     swal("Inserted!",
-                                        "Course Inserted Successfully.",
+                                        "College Merit Inserted Successfully.",
                                         "success");
                                     window.location.href =
-                                        "{{ route('college.course.index') }}";
+                                        "{{ route('college.merit.index') }}";
                                 }
                             },
                             error: function(data) {

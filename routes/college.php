@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\College\CollegeCourseController;
+use App\Http\Controllers\College\CollegeMeritController;
 use App\Http\Controllers\College\DashboardController;
 use App\Http\Controllers\College\LoginController;
 use App\Http\Controllers\College\RegisterController;
@@ -47,6 +48,18 @@ Route::group(['middleware' => 'auth:college'], function () {
 
     //College Courses
     Route::resource('course','CollegeCourseController');
+    Route::post('delete',     [CollegeCourseController::class, 'destroy'])->name('delete');
+
+    //College Merit
+    Route::resource('merit','CollegeMeritController');
+    Route::post('round', [CollegeMeritController::class,'getRound'])->name('round');
+    Route::post('merit-delete',     [CollegeMeritController::class, 'destroy'])->name('merit_delete');
+
+
+
+
+
+
 
 
 

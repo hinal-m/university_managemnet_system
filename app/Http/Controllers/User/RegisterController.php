@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\College\StoreRequest;
+use App\Http\Requests\User\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,7 @@ class RegisterController extends Controller
     {
         return view('User.Auth.register');
     }
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         $collge = new User();
         $collge->name = $request->name;

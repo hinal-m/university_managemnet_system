@@ -5,6 +5,7 @@ use App\Http\Controllers\University\CollegeController;
 use App\Http\Controllers\University\CommonSettingController;
 use App\Http\Controllers\University\CourseController;
 use App\Http\Controllers\University\LoginController;
+use App\Http\Controllers\University\MaritRoundController;
 use App\Http\Controllers\University\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,13 @@ Route::group(['middleware' => 'auth:university'], function () {
     //Course
     Route::get('/course-list', [CourseController::class, 'index'])->name('course_list');
     Route::get('course-status',[CourseController::class, 'status'])->name('course_status');
+
+    //marit round
+    Route::resource('marit','MaritRoundController');
+    Route::post('merit-delete', [MaritRoundController::class, 'destroy'])->name('merit_delete');
+    Route::get('merit-status',[MaritRoundController::class, 'status'])->name('merit_status');
+
+
 
 
 });

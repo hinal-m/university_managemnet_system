@@ -2,7 +2,9 @@
 
 namespace App\DataTables;
 
-use App\Models\CollegeCourse;
+use App\Models\College;
+use App\Models\CollegeMerit;
+use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -10,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CollegeCourseDataTable extends DataTable
+class CollegeMeritDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,31 +24,32 @@ class CollegeCourseDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('college_id', function ($data) {
+                return $data->college->name;
+
+            })
+            ->editColumn('course_id', function ($data) {
+                return $data->course->name;
+
+            })
             ->addColumn('action', function ($data) {
-                // dd($data->id);
                 $result = '<div class="btn-group">';
-                    $result .= '<a href="' . route('college.course.edit', $data->id) .
-                    '"><button class="btn-sm btn-primary mr-sm-2 mb-1" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>';
                     $result .= '<button type="submit" data-id="' . $data->id . '" class="btn-sm btn-danger mr-sm-2 mb-1 delete"><i class="fa fa-trash" aria-hidden="true"></i></button>';
                     return $result;
             })
-            ->editColumn('course_id', function ($data) {
-                return $data->Course->name ?? '-';
-            })
-            ->rawColumns(['course_id','action'])
+            ->rawColumns(['course_id','college_id','action'])
             ->addIndexColumn();
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\CollegeCourse $model
+     * @param \App\Models\CollegeMerit $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(CollegeCourse $model)
+    public function query(CollegeMerit $model)
     {
-        // dd($model->id);
-        return $model->where('college_id',Auth::guard('college')->user()->id)->with('Course')->newQuery();
+        return $model->where('college_id',Auth::guard('college')->user()->id)->with('college')->with('course')->with('Course')->newQuery();
     }
 
     /**
@@ -57,7 +60,7 @@ class CollegeCourseDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('collegecourse-table')
+                    ->setTableId('collegemerit-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -80,11 +83,12 @@ class CollegeCourseDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('course_id')->name('Course.name'),
-            Column::make('reserved_seat'),
-            Column::make('merit_seat'),
-            Column::make('seat_no'),
-            Column::make('action'),
+            Column::make('college_id')->title('College name')->name('college.name'),
+            Column::make('course_id')->name('course.name'),
+            Column::make('merit_round_id')->title('Merit Round No'),
+            Column::make('merit'),
+            Column::computed('action'),
+            // Column::computed('action')
         ];
     }
 
@@ -95,6 +99,6 @@ class CollegeCourseDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'CollegeCourse_' . date('YmdHis');
+        return 'CollegeMerit_' . date('YmdHis');
     }
 }

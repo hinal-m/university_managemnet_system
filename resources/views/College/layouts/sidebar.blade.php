@@ -9,7 +9,7 @@
       <div class="nav-container">
          <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <!-- Dashboard -->
-            <li class=" nav-item"><a href="{{ route('college.dashboard') }}" class="text-decoration-none"><i class="ft-home"></i><span class="menu-title" data-i18n="Chat">Dashboard</span></a>
+            <li class=" nav-item {{ request()->is('*dashboard*') ? 'active' : '' }}"><a href="{{ route('college.dashboard') }}" class="text-decoration-none"><i class="ft-home"></i><span class="menu-title" data-i18n="Chat">Dashboard</span></a>
                <!-- <li class="has-sub nav-item"><a href="javascript:;"><i class="ft-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span><span class="tag badge badge-pill badge-danger float-right mr-1 mt-1">2</span></a>
                <ul class="menu-content">
                   <li class="active"><a href="{{ route('college.dashboard') }}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item" data-i18n="Dashboard 1">Dashboard 1</span></a>
@@ -18,26 +18,16 @@
                   </li>
                </ul>
             </li> -->
-            <li class="">
+            <li class="{{ request()->is('*course*') ? 'active' : '' }}">
                <a href="{{route('college.course.index')}}" class="text-decoration-none">
                   <i class="fa fa-shopping-basket"></i>
                   <span class="menu-title" data-i18n="Email">College Courses</span>
                </a>
             </li>
-            <li class="nav-item  ">
-               <a href="" class="text-decoration-none">
-                  <i class="fab fa-bandcamp"></i>
-                  <span class="menu-title" data-i18n="Email">Brand</span>
-               </a>
-            </li>
-            <li class="nav-item  ">
-               <a href="" class="text-decoration-none"><i class="fa fa-window-restore"></i><span class="menu-title" data-i18n="Chat">Category</span>
-               </a>
-            </li>
-            <li class="nav-item  ">
-               <a href="" class="text-decoration-none">
-                  <i class="fa fa-th-list"></i>
-                  <span class="menu-title" data-i18n="Chat">Product</span>
+            <li class="{{ request()->is('*merit*') ? 'active' : '' }}">
+               <a href="{{route('college.merit.index')}}" class="text-decoration-none">
+                  <i class="fa fa-shopping-basket"></i>
+                  <span class="menu-title" data-i18n="Email">College Merit</span>
                </a>
             </li>
          </ul>

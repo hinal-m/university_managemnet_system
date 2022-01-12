@@ -2,15 +2,15 @@
 
 namespace App\DataTables;
 
-use App\Models\CollegeCourse;
-use Illuminate\Support\Facades\Auth;
+use App\Models\StudentMark;
+use App\Models\StudentMarks;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CollegeCourseDataTable extends DataTable
+class StudentMarkDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,31 +22,18 @@ class CollegeCourseDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function ($data) {
-                // dd($data->id);
-                $result = '<div class="btn-group">';
-                    $result .= '<a href="' . route('college.course.edit', $data->id) .
-                    '"><button class="btn-sm btn-primary mr-sm-2 mb-1" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>';
-                    $result .= '<button type="submit" data-id="' . $data->id . '" class="btn-sm btn-danger mr-sm-2 mb-1 delete"><i class="fa fa-trash" aria-hidden="true"></i></button>';
-                    return $result;
-            })
-            ->editColumn('course_id', function ($data) {
-                return $data->Course->name ?? '-';
-            })
-            ->rawColumns(['course_id','action'])
-            ->addIndexColumn();
+            ->addColumn('action', 'studentmark.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\CollegeCourse $model
+     * @param \App\Models\StudentMark $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(CollegeCourse $model)
+    public function query(StudentMark $model)
     {
-        // dd($model->id);
-        return $model->where('college_id',Auth::guard('college')->user()->id)->with('Course')->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -57,7 +44,7 @@ class CollegeCourseDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('collegecourse-table')
+                    ->setTableId('studentmark-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -79,12 +66,15 @@ class CollegeCourseDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::computed('action')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(60)
+                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('course_id')->name('Course.name'),
-            Column::make('reserved_seat'),
-            Column::make('merit_seat'),
-            Column::make('seat_no'),
-            Column::make('action'),
+            Column::make('add your columns'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
         ];
     }
 
@@ -95,6 +85,6 @@ class CollegeCourseDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'CollegeCourse_' . date('YmdHis');
+        return 'StudentMark_' . date('YmdHis');
     }
 }

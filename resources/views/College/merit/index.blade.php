@@ -10,7 +10,7 @@
       </div>
       <div class="text-right">
          <div class="mb-2">
-            <a href="{{route('college.course.create')}}" class="btn gradient-pomegranate big-shadow">Add Courses</a>
+            <a href="{{route('college.merit.create')}}" class="btn gradient-pomegranate big-shadow">Add Courses</a>
          </div>
       </div>
    </div>
@@ -47,7 +47,7 @@
         var el = this;
         swal({
                 title: "Are you sure?",
-                text: "You Want To Delete The Course!",
+                text: "You Want To Delete The College Merit!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -58,7 +58,7 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: "{{ route('college.delete') }}",
+                        url: "{{ route('college.merit_delete') }}",
                         type: 'POST',
                         dataType: "JSON",
                         data: {
@@ -67,13 +67,13 @@
                         cache: false,
                         success: function(data) {
                             if (data) {
-                                window.LaravelDataTables["collegecourse-table"].draw();
+                                window.LaravelDataTables["collegemerit-table"].draw();
                             } else {
                                 swal("oops!", "Something went wrong", "error");
                             }
                         }
                     });
-                    swal("Course has been deleted!", {
+                    swal("College Merit has been deleted!", {
                         icon: "success",
                     });
                 } else {

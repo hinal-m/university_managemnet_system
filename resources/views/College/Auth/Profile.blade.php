@@ -31,14 +31,14 @@
                                             aria-labelledby="account-tab">
                                             <!-- Media object starts -->
                                             <div class="media">
-                                                <img src="{{ $college->logo }}" alt="user edit avatar"
+                                                <img src="{{ $college->logo }}" name="logo" alt="user edit avatar"
                                                     class="users-avatar-shadow avatar mr-3 rounded-circle" height="90"
                                                     width="90">
                                                 <div class="media-body">
                                                     <h4>Avatar</h4>
                                                     <div
                                                         class="d-flex flex-sm-row flex-column justify-content-start px-0 mb-sm-2">
-                                                        <input type="file" name="image">
+                                                        <input type="file" name="logo">
                                                     </div>
                                                 </div>
                                             </div>

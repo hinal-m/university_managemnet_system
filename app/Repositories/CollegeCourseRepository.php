@@ -27,9 +27,10 @@ class CollegeCourseRepository implements CollegeCourseInterface
         $college = new CollegeCourse;
         $college->college_id = Auth::user('college')->id;
         $college->course_id = $data['course_id'];
-        $college->seat_no = $data['seat_no'];
-        $college->reserved_seat = $data['reserved_seat'];
         $college->merit_seat = $data['merit_seat'];
+        $college->reserved_seat = $data['reserved_seat'];
+        $seat_no = $data['merit_seat'] + $data['reserved_seat'];
+        $college->seat_no = $seat_no;
         $save = $college->save();
         return $save;
     }
@@ -38,17 +39,18 @@ class CollegeCourseRepository implements CollegeCourseInterface
     {
         $college = CollegeCourse::find($data['id']);
         $college->course_id = $data['course_id'];
-        $college->seat_no = $data['seat_no'];
-        $college->reserved_seat = $data['reserved_seat'];
         $college->merit_seat = $data['merit_seat'];
+        $college->reserved_seat = $data['reserved_seat'];
+        $seat_no = $data['merit_seat'] + $data['reserved_seat'];
+        $college->seat_no = $seat_no;
         $save = $college->save();
         return $save;
     }
 
     public function delete(array $data)
     {
-        $category = College::find($data['id']);
-        $category->delete();
-        return $category;
+        $college_course = CollegeCourse::find($data['id']);
+        $college_course->delete();
+        return $college_course;
     }
 }

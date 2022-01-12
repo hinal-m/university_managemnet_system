@@ -57,13 +57,13 @@ class DashboardController extends Controller
 
       public function editProfile(Request $request)
       {
-         $college = College::find(Auth::user()->id);
+          $college = College::find(Auth::user()->id);
 
-         $college->name = $request->name;
-         $college->email = $request['email'];
-         $college->address = $request['address'];
-         $college->contact_no = $request['contact'];
-         if (isset($request['logo'])) {
+          $college->name = $request->name;
+          $college->email = $request['email'];
+          $college->address = $request['address'];
+          $college->contact_no = $request['contact'];
+          if (isset($request['logo'])) {
              $image = $college->getRawOriginal('logo');
              if (file_exists(public_path('storage/college/' . $image))) {
                  @unlink(public_path('storage/college/' . $image));

@@ -49,7 +49,7 @@
                                 <i class="button__icon fas fa-chevron-right"></i>
                             </button>
                             <a href="{{route('user.register')}}"
-                            class="btn bg-light-primary mb-2 mb-sm-0">Forgot Password?</a>
+                            class="btn bg-light-primary mb-2 mb-sm-0">Register Now</a>
                         </form>
                     </div>
                 </div>

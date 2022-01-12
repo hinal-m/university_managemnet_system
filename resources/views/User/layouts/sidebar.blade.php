@@ -19,25 +19,15 @@
                </ul>
             </li> -->
             <li class="">
-               <a href="" class="text-decoration-none">
+               <a href="{{route('user.addmission.index')}}" class="text-decoration-none">
                   <i class="fa fa-shopping-basket"></i>
-                  <span class="menu-title" data-i18n="Email">Store</span>
+                  <span class="menu-title" data-i18n="Email">Adminssion</span>
                </a>
             </li>
-            <li class="nav-item  ">
-               <a href="" class="text-decoration-none">
-                  <i class="fab fa-bandcamp"></i>
-                  <span class="menu-title" data-i18n="Email">Brand</span>
-               </a>
-            </li>
-            <li class="nav-item  ">
-               <a href="" class="text-decoration-none"><i class="fa fa-window-restore"></i><span class="menu-title" data-i18n="Chat">Category</span>
-               </a>
-            </li>
-            <li class="nav-item  ">
-               <a href="" class="text-decoration-none">
-                  <i class="fa fa-th-list"></i>
-                  <span class="menu-title" data-i18n="Chat">Product</span>
+            <li class="">
+               <a href="{{route('user.marks.index')}}" class="text-decoration-none">
+                  <i class="fa fa-shopping-basket"></i>
+                  <span class="menu-title" data-i18n="Email">Student Marks</span>
                </a>
             </li>
          </ul>

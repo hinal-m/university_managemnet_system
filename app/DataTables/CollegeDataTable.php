@@ -23,7 +23,6 @@ class CollegeDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', function ($data) {
                 $result = '<div class="btn-group">';
-            $result .= '<a href=""><button class="btn-sm btn-warning mr-sm-2 mb-1" >Show</button></a>';
                     $result .= '<a href="' . route('university.college.edit', $data->id) .
                     '"><button class="btn-sm btn-dark mr-sm-2 mb-1">Edit</button></a>';
                     $result .= '<button type="submit" data-id="' . $data->id . '" class="btn btn-danger mr-sm-2 mb-1 delete">Delete</button>';

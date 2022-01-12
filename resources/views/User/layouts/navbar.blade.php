@@ -43,9 +43,9 @@
                             <li class="scrollable-container"><a class="d-flex justify-content-between"
                                     href="javascript:void(0)">
                                     <div class="media d-flex align-items-center">
-                                        <!-- <div class="media-left">
+                                        {{-- <!-- <div class="media-left">
                                  <div class="mr-3"><img class="avatar" src="{{ asset('saller-assets/app-assets/img/portrait/small/pic-8.png') }}" alt="avatar" height="45" width="45"></div>
-                              </div> -->
+                              </div> --> --}}
                                         <div class="media-body appends" id="appends">
                                             <!-- message -->
                                         </div>
@@ -67,7 +67,7 @@
                             <div class="user d-md-flex d-none mr-2"><span class="text-right">{{(Auth::Guard('user')->user()->name)}} </span><span
                                     class="text-right text-muted font-small-3">Available</span></div>
                             <img class="avatar"
-                                src="{{ asset('saller-assets/app-assets/img/portrait/small/default.png') }}"
+                                src="{{ Auth::guard('user')->user()->image }}"
                                 alt="avatar" height="35" width="35">
                         </a>
                         <div class="dropdown-menu text-left dropdown-menu-right m-0 pb-0"

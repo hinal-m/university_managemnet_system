@@ -1,4 +1,4 @@
-@extends('College.layouts.master')
+@extends('User.layouts.master')
 @section('title', 'Courses')
 
 @section('content')
@@ -10,7 +10,7 @@
       </div>
       <div class="text-right">
          <div class="mb-2">
-            <a href="{{route('college.course.create')}}" class="btn gradient-pomegranate big-shadow">Add Courses</a>
+            <a href="{{route('user.addmission.create')}}" class="btn gradient-pomegranate big-shadow">Add Courses</a>
          </div>
       </div>
    </div>

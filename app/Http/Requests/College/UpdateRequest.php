@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         $id = $this->id;
         return [
-            'name' => 'required',
+            'name' => 'required|unique:colleges,name,'.$id,
             'email' => 'required|email|unique:colleges,email,'.$id,
             'address' => 'required',
             'contact' => 'required|max:10|min:10',

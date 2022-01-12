@@ -68,7 +68,7 @@
                             <div class="user d-md-flex d-none mr-2"><span class="text-right">{{(Auth::guard('college')->user()->name)}}</span><span
                                     class="text-right text-muted font-small-3">Available</span></div>
                             <img class="avatar"
-                                src="{{ asset('saller-assets/app-assets/img/portrait/small/default.png') }}"
+                                src="{{ Auth::guard('college')->user()->logo }}"
                                 alt="avatar" height="35" width="35">
                         </a>
                         <div class="dropdown-menu text-left dropdown-menu-right m-0 pb-0"

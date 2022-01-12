@@ -2,13 +2,10 @@
 @section('title', 'Courses')
 
 @section('content')
-
+    {{-- @dd($student_mark) --}}
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-12">
-                <div class="content-header">Inputs</div>
-            </div>
         </div>
         <!-- Basic Inputs start -->
         <section id="basic-hidden-label-form-layouts">
@@ -17,36 +14,26 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">College Course Add</h4>
+                            <h4 class="card-title">Addmission</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form id="submit_form" action="{{ route('college.course.store') }}" method="post"
+                                <form id="submit_form" action="{{ route('user.marks.store') }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
 
-                                    <div class="form-group mb-2">
-                                        <label for="basic-form-6">Courses</label>
-                                        <select id="course_id" name="course_id" class="form-control">
-                                            <option value="" selected disabled>Select Course</option>
-                                            @foreach ($college_course as $value)
-                                                <option value="{{ $value->id }}">{{ $value->name }}</option>
-                                            @endforeach
-                                        </select>
-
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label for="reserved_seat">Reserved Seat</label>
-                                        <input type="text" id="reserved_seat" class="form-control"
-                                            data-validation-required-message="This First Name field is required"
-                                            name="reserved_seat">
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label for="seat_no">Merit No</label>
-                                        <input type="text" id="merit_seat" class="form-control"
-                                            data-validation-required-message="This First Name field is required"
-                                            name="merit_seat">
-                                    </div>
+                                    @foreach ($student_mark as $value)
+                                    <input type="hidden" name="id[]" value="{{$value->id}}">
+                                    <div class="col-auto">
+                                        <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                                        <div class="input-group mb-2">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">{{$value->name}}</div>
+                                          </div>
+                                          <input type="text" class="form-control"  name="mark[]" placeholder="Username">
+                                        </div>
+                                      </div>
+                                    @endforeach
 
 
                                     <button type="submit" class="btn btn-primary mr-2"><i
@@ -68,31 +55,25 @@
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
+            $(".mark").keyup(function() {
+               var mark=$(this).val();
+                 var a=100;
+                 if(mark>100)
+                 {
+                 }
+            });
             $(document).ready(function() {
                 $('#submit_form').validate({
                     rules: {
-                        course_id: {
-                            required: true,
-                        },
-                        reserved_seat: {
-                            required: true,
-                            digits: true
-                        },
-                        merit_seat: {
+                        Subject_marks: {
                             required: true,
                             digits: true
                         },
 
                     },
                     messages: {
-                        'course_id': {
-                            'required': 'Please Select Course'
-                        },
-                        'reserved_seat': {
-                            'required': 'Please Enter Reserved seat'
-                        },
-                        'merit_seat': {
-                            'required': 'Please Enter Merit Seat'
+                        'Subject_marks': {
+                            'required': 'Please Enter Marks'
                         },
                     },
                     highlight: function(element, errorClass, validClass) {
@@ -124,7 +105,7 @@
                                     .attr('content')
                             },
                             type: 'POST',
-                            url: "{{ route('college.course.store') }}",
+                            url: "{{ route('user.marks.store') }}",
                             data: formData,
                             dataType: 'JSON',
                             contentType: false,
@@ -136,7 +117,7 @@
                                         "Course Inserted Successfully.",
                                         "success");
                                     window.location.href =
-                                        "{{ route('college.course.index') }}";
+                                        "{{ route('user.marks.index') }}";
                                 }
                             },
                             error: function(data) {

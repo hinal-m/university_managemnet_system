@@ -2,13 +2,9 @@
 @section('title', 'Courses')
 
 @section('content')
-
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="row">
-            <div class="col-12">
-                <div class="content-header">Inputs</div>
-            </div>
         </div>
         <!-- Basic Inputs start -->
         <section id="basic-hidden-label-form-layouts">
@@ -17,19 +13,19 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">College Course Add</h4>
+                            <h4 class="card-title">Addmission</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form id="submit_form" action="{{ route('college.course.store') }}" method="post"
+                                <form id="submit_form" action="{{ route('user.addmission.store') }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="form-group mb-2">
-                                        <label for="basic-form-6">Courses</label>
+                                        <label for="basic-form-6">Collge</label>
                                         <select id="course_id" name="course_id" class="form-control">
-                                            <option value="" selected disabled>Select Course</option>
-                                            @foreach ($college_course as $value)
+                                            <option value="" selected disabled>Select College</option>
+                                            @foreach ($college as $value)
                                                 <option value="{{ $value->id }}">{{ $value->name }}</option>
                                             @endforeach
                                         </select>
