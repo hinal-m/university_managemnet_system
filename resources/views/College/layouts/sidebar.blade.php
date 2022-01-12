@@ -19,9 +19,9 @@
                </ul>
             </li> -->
             <li class="">
-               <a href="" class="text-decoration-none">
+               <a href="{{route('college.course.index')}}" class="text-decoration-none">
                   <i class="fa fa-shopping-basket"></i>
-                  <span class="menu-title" data-i18n="Email">Store</span>
+                  <span class="menu-title" data-i18n="Email">College Courses</span>
                </a>
             </li>
             <li class="nav-item  ">

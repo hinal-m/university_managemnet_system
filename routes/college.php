@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\College\CollegeCourseController;
 use App\Http\Controllers\College\DashboardController;
 use App\Http\Controllers\College\LoginController;
 use App\Http\Controllers\College\RegisterController;
@@ -39,6 +40,14 @@ Route::group(['middleware' => 'auth:college'], function () {
      //Change Password
      Route::get('/changePassword',      [DashboardController::class, 'showChangePasswordGet'])->name('changePasswordGet');
      Route::post('/changePassword',     [DashboardController::class, 'changePasswordPost'])->name('changePasswordPost');
+
+     //Profile
+    Route::get('/profile/{id}',      [DashboardController::class, 'showProfile'])->name('profile');
+    Route::post('/edit-profile',      [DashboardController::class, 'editProfile'])->name('edit_profile');
+
+    //College Courses
+    Route::resource('course','CollegeCourseController');
+
 
 
 });

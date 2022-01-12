@@ -66,12 +66,20 @@
                     <span class="menu-title">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item menu-items {{ request()->is('*index*') ? 'active' : '' }}">
+            <li class="nav-item menu-items {{ request()->is('*college*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('university.college.index')}}">
                     <span class="menu-icon">
                         <i class="mdi mdi-speedometer"></i>
                     </span>
                     <span class="menu-title">Colleges</span>
+                </a>
+            </li>
+            <li class="nav-item menu-items {{ request()->is('*list*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('university.list')}}">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-speedometer"></i>
+                    </span>
+                    <span class="menu-title">Manage Student</span>
                 </a>
             </li>
             <li class="nav-item menu-items {{ request()->is('*index*') ? 'active' : '' }}">
@@ -80,6 +88,14 @@
                         <i class="mdi mdi-speedometer"></i>
                     </span>
                     <span class="menu-title">Common Setting</span>
+                </a>
+            </li>
+            <li class="nav-item menu-items {{ request()->is('*course-list*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('university.course_list')}}">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-speedometer"></i>
+                    </span>
+                    <span class="menu-title">Course</span>
                 </a>
             </li>
     </ul>

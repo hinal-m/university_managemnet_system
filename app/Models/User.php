@@ -20,14 +20,18 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'address',
+        'dob',
+        'gender',
+        'adhaar_card_no',
         'password',
+        'image',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    public function getImageAttribute($value)
+    {
+        return $value ? asset('storage/student' . '/' . $value) : NULL;
+    }
     protected $hidden = [
         'password',
         'remember_token',

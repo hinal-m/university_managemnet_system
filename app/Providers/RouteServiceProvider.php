@@ -21,7 +21,9 @@ class RouteServiceProvider extends ServiceProvider
 
     protected $namespace_university = 'App\\Http\\Controllers\\University';
 
-    protected $namespace_college = 'App\\Http\\Controllers';
+    protected $namespace_college = 'App\\Http\\Controllers\\College';
+
+    protected $namespace_user = 'App\\Http\\Controllers\\User';
 
     /**
      * The controller namespace for the application.
@@ -62,6 +64,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->as('college.')
                 ->namespace($this->namespace_college)
                 ->group(base_path('routes/college.php'));
+
+            Route::prefix('user')
+                ->middleware('web')
+                ->as('user.')
+                ->namespace($this->namespace_user)
+                ->group(base_path('routes/user.php'));
         });
     }
 

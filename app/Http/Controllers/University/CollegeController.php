@@ -96,14 +96,14 @@ class CollegeController extends Controller
     public function status(Request $request)
     {
         $id = $request['id'];
-        $product = College::find($id);
+        $college = College::find($id);
 
-        if ($product->status == "1") {
-            $product->status = "0";
+        if ($college->status == "1") {
+            $college->status = "0";
         } else {
-            $product->status = "1";
+            $college->status = "1";
         }
-        $product->save();
-        return response()->json(['data' => $product]);
+        $college->save();
+        return response()->json(['data' => $college]);
     }
 }

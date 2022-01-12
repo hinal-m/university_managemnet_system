@@ -3,7 +3,9 @@
 use App\Http\Controllers\University\DashboardController;
 use App\Http\Controllers\University\CollegeController;
 use App\Http\Controllers\University\CommonSettingController;
+use App\Http\Controllers\University\CourseController;
 use App\Http\Controllers\University\LoginController;
+use App\Http\Controllers\University\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,5 +47,18 @@ Route::group(['middleware' => 'auth:university'], function () {
 
     //Common Setting
     Route::get('/index', [CommonSettingController::class, 'index'])->name('index');
+    Route::get('/create', [CommonSettingController::class, 'create'])->name('create');
+    Route::post('/store', [CommonSettingController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [CommonSettingController::class, 'edit'])->name('edit');
+    Route::post('update', [CommonSettingController::class, 'update'])->name('update');
+
+    //Sudent
+    Route::get('/list', [StudentController::class, 'index'])->name('list');
+    Route::post('delete', [StudentController::class, 'delete'])->name('delete');
+
+    //Course
+    Route::get('/course-list', [CourseController::class, 'index'])->name('course_list');
+    Route::get('course-status',[CourseController::class, 'status'])->name('course_status');
+
 
 });

@@ -10,6 +10,8 @@
                     <div class="card">
                         <div class="card-header card-header-flex">
                             <h4 class="card-title">Common Setting Table</h4>
+                            <a href="{{ route('university.create') }}" class="btn btn-dark btn-lg ">Add
+                                Setting</a>
                         </div>
                         <div class="card-body">
 

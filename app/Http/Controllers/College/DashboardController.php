@@ -46,4 +46,34 @@ class DashboardController extends Controller
 
          return redirect()->back()->with("success", "Password successfully changed!");
      }
+
+      //Profile
+
+      public function showProfile($id)
+      {
+          $college = College::find($id);
+          return view('College.Auth.Profile',compact('college'));
+      }
+
+      public function editProfile(Request $request)
+      {
+         $college = College::find(Auth::user()->id);
+
+         $college->name = $request->name;
+         $college->email = $request['email'];
+         $college->address = $request['address'];
+         $college->contact_no = $request['contact'];
+         if (isset($request['logo'])) {
+             $image = $college->getRawOriginal('logo');
+             if (file_exists(public_path('storage/college/' . $image))) {
+                 @unlink(public_path('storage/college/' . $image));
+             }
+             $images = uploadFile($request['logo'], 'college');
+             $college->logo = $images;
+         } else {
+             $images = $college->getRawOriginal('logo');
+         }
+         $save = $college->save();
+         return response()->json([ 'data' => $save]);
+      }
 }

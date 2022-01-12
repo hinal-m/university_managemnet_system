@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\CommonSetting;
+use App\Models\Course;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CommonSettingDataTable extends DataTable
+class CourseDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,28 +21,26 @@ class CommonSettingDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function ($data) {
-                $result = '<div class="btn-group">';
-                    $result .= '<a href="' . route('university.edit', $data->id) .
-                    '"><button class="btn-sm btn-dark mr-sm-2 mb-1">Edit</button></a>';
-                    return $result;
-            })
-            ->editColumn('subject_id', function ($data) {
-                return $data->Subject->name ?? '-';
-            })
-            ->rawColumns(['action','subject_id'])
-            ->addIndexColumn();
+            ->editColumn('status', function ($data) {
+                if ($data->status == '0') {
+                    return '<a data-id="' . $data->id . '"  style="color:white" class="badge badge-pill-lg badge-danger status">Inactive</a>';
+                } else {
+                    return '<a data-id="' . $data->id . '"  style="color:white" width="70px" class="badge badge-pill-lg badge-success status">Active</a>';
+                }
+        })
+        ->rawColumns(['status'])
+        ->addIndexColumn();
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\CommonSetting $model
+     * @param \App\Models\Course $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(CommonSetting $model)
+    public function query(Course $model)
     {
-        return $model->newQuery()->with('Subject');
+        return $model->newQuery();
     }
 
     /**
@@ -53,7 +51,7 @@ class CommonSettingDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('commonsetting-table')
+                    ->setTableId('course-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -76,9 +74,8 @@ class CommonSettingDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('subject_id')->title('Subject')->name('Subject.name'),
-            Column::make('marks'),
-            Column::computed('action')
+            Column::computed('name'),
+            Column::computed('status'),
         ];
     }
 
@@ -89,6 +86,6 @@ class CommonSettingDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'CommonSetting_' . date('YmdHis');
+        return 'Course_' . date('YmdHis');
     }
 }

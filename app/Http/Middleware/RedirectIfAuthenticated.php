@@ -30,6 +30,9 @@ class RedirectIfAuthenticated
                 if($guard === 'college'){
                     return redirect()->route('college.dashboard');
                 }
+                if($guard === 'user'){
+                    return redirect()->route('user.dashboard');
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }

@@ -37,7 +37,7 @@ class CollegeRepository implements CollegeInterface
         $college->contact_no = $data['contact'];
         $college->status = '1';
         if (isset($data['logo'])) {
-            $image = $college->getRawOriginal('cover_image');
+            $image = $college->getRawOriginal('logo');
             if (file_exists(public_path('storage/college/' . $image))) {
                 @unlink(public_path('storage/college/' . $image));
             }

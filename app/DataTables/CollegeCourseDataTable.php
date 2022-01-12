@@ -2,14 +2,15 @@
 
 namespace App\DataTables;
 
-use App\Models\CommonSetting;
+use App\Models\CollegeCourse;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CommonSettingDataTable extends DataTable
+class CollegeCourseDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,27 +23,30 @@ class CommonSettingDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function ($data) {
+                // dd($data->id);
                 $result = '<div class="btn-group">';
-                    $result .= '<a href="' . route('university.edit', $data->id) .
-                    '"><button class="btn-sm btn-dark mr-sm-2 mb-1">Edit</button></a>';
+                    $result .= '<a href="' . route('college.course.edit', $data->id) .
+                    '"><button class="btn-sm btn-primary mr-sm-2 mb-1" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>';
+                    $result .= '<button type="submit" data-id="' . $data->id . '" class="btn-sm btn-danger mr-sm-2 mb-1 delete"><i class="fa fa-trash" aria-hidden="true"></i></button>';
                     return $result;
             })
-            ->editColumn('subject_id', function ($data) {
-                return $data->Subject->name ?? '-';
+            ->editColumn('course_id', function ($data) {
+                return $data->Course->name ?? '-';
             })
-            ->rawColumns(['action','subject_id'])
+            ->rawColumns(['course_id','action'])
             ->addIndexColumn();
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\CommonSetting $model
+     * @param \App\Models\CollegeCourse $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(CommonSetting $model)
+    public function query(CollegeCourse $model)
     {
-        return $model->newQuery()->with('Subject');
+        // dd($model->id);
+        return $model->where('college_id',Auth::guard('college')->user()->id)->with('Course')->newQuery();
     }
 
     /**
@@ -53,7 +57,7 @@ class CommonSettingDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('commonsetting-table')
+                    ->setTableId('collegecourse-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -76,9 +80,11 @@ class CommonSettingDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('subject_id')->title('Subject')->name('Subject.name'),
-            Column::make('marks'),
-            Column::computed('action')
+            Column::make('course_id'),
+            Column::make('seat_no'),
+            Column::make('reserved_seat'),
+            Column::make('merit_seat'),
+            Column::make('action'),
         ];
     }
 
@@ -89,6 +95,6 @@ class CommonSettingDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'CommonSetting_' . date('YmdHis');
+        return 'CollegeCourse_' . date('YmdHis');
     }
 }

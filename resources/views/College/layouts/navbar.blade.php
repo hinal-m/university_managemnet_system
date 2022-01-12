@@ -21,8 +21,7 @@
         <div class="navbar-container">
             <div class="collapse navbar-collapse d-block" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    <div class="col-md-6 col-12">
-                    </div>
+
                     <li class="dropdown nav-item">
                         <a class="nav-link dropdown-toggle dropdown-notification p-0 mt-2 notifi" id="dropdownBasic1"
                             href="javascript:;" data-toggle="dropdown">
@@ -66,7 +65,7 @@
                     <li class="dropdown nav-item mr-1"><a
                             class="nav-link dropdown-toggle user-dropdown d-flex align-items-end" id="dropdownBasic2"
                             href="javascript:;" data-toggle="dropdown">
-                            <div class="user d-md-flex d-none mr-2"><span class="text-right">College </span><span
+                            <div class="user d-md-flex d-none mr-2"><span class="text-right">{{(Auth::guard('college')->user()->name)}}</span><span
                                     class="text-right text-muted font-small-3">Available</span></div>
                             <img class="avatar"
                                 src="{{ asset('saller-assets/app-assets/img/portrait/small/default.png') }}"
@@ -77,7 +76,7 @@
                                 <!-- <div class="d-flex align-items-center"><i -->
                                 <!-- class="ft-message-square mr-2"></i><span>Chat</span></div> -->
                             </a>
-                            <a class="dropdown-item" href="">
+                            <a class="dropdown-item" href="{{route('college.profile',Auth::user()->id)}}">
                                 <div class="d-flex align-items-center"><i class="ft-edit mr-2"></i><span>Edit
                                         Profile</span></div>
                             </a>
