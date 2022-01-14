@@ -21,5 +21,16 @@ class Addmission extends Model
     {
         return $this->belongsTo(College::class, 'college_id');
     }
+    public function meritRound()
+    {
+        return $this->belongsTo(MeritRound::class, 'merit_round_id');
+    }
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
+   
+
+
 }
 

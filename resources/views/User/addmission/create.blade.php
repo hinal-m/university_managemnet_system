@@ -1,7 +1,9 @@
-@extends('College.layouts.master')
+@extends('User.layouts.master')
 @section('title', 'Courses')
 
 @section('content')
+{{-- @dd($addmission) --}}
+{{-- @dd($addmission['college']); --}}
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="row">
@@ -13,7 +15,7 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Addmission</h4>
+                            <h4 class="card-title">Addmission Form</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
@@ -23,27 +25,32 @@
 
                                     <div class="form-group mb-2">
                                         <label for="basic-form-6">Collge</label>
-                                        <select id="course_id" name="course_id" class="form-control">
+
+                                        <select id="college_id" name="college_id[]" class="form-control" multiple>
                                             <option value="" selected disabled>Select College</option>
-                                            @foreach ($college as $value)
-                                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                            @foreach ($addmission['college'] as $value)
+                                                <option value="{{ $value->id }}" {{ (isset($addmission['addmission']->college_id) ? (in_array($value->id, explode(',', $addmission['addmission']->college_id)) ? 'selected' : '') : '') }}>{{ $value->name }}</option>
                                             @endforeach
                                         </select>
-
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="reserved_seat">Reserved Seat</label>
-                                        <input type="text" id="reserved_seat" class="form-control"
-                                            data-validation-required-message="This First Name field is required"
-                                            name="reserved_seat">
+                                        <label for="basic-form-6">Merit Round</label>
+                                        <select id="merit_round_id" name="merit_round_id" class="form-control course">
+                                            <option value="" selected disabled>Select Course</option>
+                                            @foreach ($addmission['merit_round'] as $value)
+                                                <option value="{{ $value->id }}" {{ isset($addmission['addmission']->merit_round_id) ? (($value->id == $addmission['addmission']->merit_round_id) ? 'selected' : '') : '' }}>{{ $value->round_no }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="seat_no">Merit No</label>
-                                        <input type="text" id="merit_seat" class="form-control"
-                                            data-validation-required-message="This First Name field is required"
-                                            name="merit_seat">
+                                        <label for="basic-form-6">Course</label>
+                                        <select id="course_id" name="course_id" class="form-control course">
+                                            <option value="" selected disabled>Select Course</option>
+                                            @foreach ($addmission['course'] as $value)
+                                                <option value="{{ $value->id }}" {{ isset($addmission['addmission']->course_id) ? (($value->id == $addmission['addmission']->course_id) ? 'selected' : '') : '' }}>{{ $value->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-
 
                                     <button type="submit" class="btn btn-primary mr-2"><i
                                             class="ft-check-square mr-1"></i>Save</button>
@@ -67,17 +74,17 @@
             $(document).ready(function() {
                 $('#submit_form').validate({
                     rules: {
-                        course_id: {
-                            required: true,
-                        },
-                        reserved_seat: {
-                            required: true,
-                            digits: true
-                        },
-                        merit_seat: {
-                            required: true,
-                            digits: true
-                        },
+                        // course_id: {
+                        //     required: true,
+                        // },
+                        // reserved_seat: {
+                        //     required: true,
+                        //     digits: true
+                        // },
+                        // merit_seat: {
+                        //     required: true,
+                        //     digits: true
+                        // },
 
                     },
                     messages: {
@@ -120,7 +127,7 @@
                                     .attr('content')
                             },
                             type: 'POST',
-                            url: "{{ route('college.course.store') }}",
+                            url: "{{ route('user.addmission.store') }}",
                             data: formData,
                             dataType: 'JSON',
                             contentType: false,
@@ -132,7 +139,7 @@
                                         "Course Inserted Successfully.",
                                         "success");
                                     window.location.href =
-                                        "{{ route('college.course.index') }}";
+                                        "{{ route('user.addmission.create') }}";
                                 }
                             },
                             error: function(data) {

@@ -9,9 +9,7 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-header card-header-flex">
-                            <h4 class="card-title">Merit Round Table</h4>
-                            <a href="{{ route('university.marit.create') }}" class="btn btn-dark btn-lg ">Add
-                            Round</a>
+                            <h4 class="card-title">Admission Table</h4>
                         </div>
                         <div class="card-body">
 
@@ -41,7 +39,7 @@
             var el = this;
             swal({
                     title: "Are you sure?",
-                    text: "You Want To Delete The Merit Round!",
+                    text: "You Want To Delete The College!",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -52,7 +50,7 @@
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
-                            url: "{{ route('university.merit_delete') }}",
+                            url: "{{ route('university.delete') }}",
                             type: 'POST',
                             dataType: "JSON",
                             data: {
@@ -61,13 +59,13 @@
                             cache: false,
                             success: function(data) {
                                 if (data) {
-                                    window.LaravelDataTables["meritround-table"].draw();
+                                    window.LaravelDataTables["college-table"].draw();
                                 } else {
                                     swal("oops!", "Something went wrong", "error");
                                 }
                             }
                         });
-                        swal("Merit Round has been deleted!", {
+                        swal("College has been deleted!", {
                             icon: "success",
                         });
                     } else {
@@ -90,14 +88,14 @@
                     var id = $(this).data('id');
                     var number = $(this).attr('id', 'asd');
                     $.ajax({
-                        url: "{{ route('university.merit_status') }}",
+                        url: "{{ route('university.status') }}",
                         type: 'get',
                         data: {
                             id: id,
                         },
                         dataType: "json",
                         success: function(data) {
-                            $('#meritround-table').DataTable().ajax.reload();
+                            $('#college-table').DataTable().ajax.reload();
                         }
                     })
                     swal("Your Status Has Ben Change Succesfully", {

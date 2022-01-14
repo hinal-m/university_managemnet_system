@@ -4,9 +4,15 @@ namespace App\Http\Controllers\User;
 
 use App\DataTables\AddmissionDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Addmission;
 use App\Models\College;
+use App\Models\CollegeMerit;
+use App\Models\Course;
+use App\Models\MeritRound;
 use App\Repositories\AddmissionRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AddmissionController extends Controller
 {
@@ -15,75 +21,27 @@ class AddmissionController extends Controller
     {
         $this->addmission = $addmission;
     }
-    public function index(AddmissionDataTable $dataTable)
-    {
-        return $dataTable->render('user.addmission.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $college = College::get();
-        return view('user.addmission.create',compact('college'));
+        // $merit_round = MeritRound::select('end_date')->first();
+        // $toDate = Carbon::now()->format('Y-m-d');
+
+        // if($toDate == $merit_round)
+        // {
+            $addmission = $this->addmission->create();
+            // $college = College::all();
+            return view('user.addmission.create',compact('addmission'));
+        // }
+        // else
+        // {
+        //     return 'addmission date over';
+        // }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $addmission = $this->addmission->store($request->all());
+        return response()->json(['data'=> $addmission]);
     }
 }

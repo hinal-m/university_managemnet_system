@@ -106,5 +106,13 @@
                     <span class="menu-title">MArit Round</span>
                 </a>
             </li>
+            <li class="nav-item menu-items {{ request()->is('*admission*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('university.admission_list')}}">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-speedometer"></i>
+                    </span>
+                    <span class="menu-title">MArit Round</span>
+                </a>
+            </li>
     </ul>
 </nav>

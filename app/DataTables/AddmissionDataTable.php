@@ -21,7 +21,14 @@ class AddmissionDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'addmission.action');
+            ->editColumn('course_id', function ($data) {
+                return $data->Course->name ?? '-';
+            })
+            ->editColumn('college_id', function ($data) {
+                return $data->college->name ?? '-';
+            })
+            ->rawColumns(['course_id'])
+            ->addIndexColumn();
     }
 
     /**
@@ -32,7 +39,7 @@ class AddmissionDataTable extends DataTable
      */
     public function query(Addmission $model)
     {
-        return $model->newQuery();
+        return $model->with('course')->with('meritRound')->with('college')->newQuery();
     }
 
     /**
@@ -66,9 +73,11 @@ class AddmissionDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('college_id'),
+            Column::make('college_id')->name('college.name'),
             Column::make('addmission_date'),
             Column::make('addmission_code'),
+            Column::make('course_id')->name('course.name'),
+            Column::make('merit_round_id')->name('meritRound.round_no'),
             Column::make('status'),
             Column::computed('action')
         ];

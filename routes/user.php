@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\RegisterController;
+use App\Http\Controllers\User\StudentMarkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,9 @@ Route::group(['middleware' => 'auth:user'], function () {
     Route::resource('addmission','AddmissionController');
 
     //student marks
-    Route::resource('marks','StudentMarkController');
+    Route::resource('marks','StudentMarkController')->except('destroy');
+    Route::post('delete',     [StudentMarkController::class, 'destroy'])->name('delete');
+
+
 
 });

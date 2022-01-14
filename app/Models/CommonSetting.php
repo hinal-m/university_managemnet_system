@@ -16,8 +16,12 @@ class CommonSetting extends Model
 
     public function Subject()
     {
-        return $this->belongsTo(Subject::class, 'subject_id');
+        return $this->belongsTo(CommonSetting::class, 'subject_id','subject_id');
     }
+    // public function commonSetting()
+    // {
+    //     return $this->hasOne(Subject::class,'subject_id','id');
+    // }
 
 
 }

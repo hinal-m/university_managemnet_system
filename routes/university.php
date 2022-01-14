@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\University\AddmissionController;
 use App\Http\Controllers\University\DashboardController;
 use App\Http\Controllers\University\CollegeController;
 use App\Http\Controllers\University\CommonSettingController;
@@ -65,6 +66,9 @@ Route::group(['middleware' => 'auth:university'], function () {
     Route::resource('marit','MaritRoundController');
     Route::post('merit-delete', [MaritRoundController::class, 'destroy'])->name('merit_delete');
     Route::get('merit-status',[MaritRoundController::class, 'status'])->name('merit_status');
+
+    //admission
+    Route::get('admission',[AddmissionController::class,'index'])->name('admission_list');
 
 
 

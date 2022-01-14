@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\StudentMark;
 use App\Models\StudentMarks;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -22,7 +23,16 @@ class StudentMarkDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'studentmark.action');
+            ->addColumn('action', function ($data) {
+                // dd($data->id);
+                $result = '<div class="btn-group">';
+                    $result .= '<a href="' . route('user.marks.edit', $data->id) .
+                    '"><button class="btn-sm btn-primary mr-sm-2 mb-1" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>';
+                    $result .= '<button type="submit" data-id="' . $data->id . '" class="btn-sm btn-danger mr-sm-2 mb-1 delete"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                    return $result;
+            })
+            ->rawColumns(['course_id','action'])
+            ->addIndexColumn();
     }
 
     /**
@@ -33,7 +43,8 @@ class StudentMarkDataTable extends DataTable
      */
     public function query(StudentMark $model)
     {
-        return $model->newQuery();
+        return $model->where('user_id',Auth::guard('user')->user()->id)->newQuery();
+
     }
 
     /**
@@ -66,15 +77,12 @@ class StudentMarkDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('user_id'),
+            Column::make('subject_id'),
+            Column::make('total_mark'),
+            Column::make('obtain_mark'),
+            Column::computed('action')
         ];
     }
 
