@@ -85,7 +85,6 @@ class AddmissionDataTable extends DataTable
             Column::make('addmission_date'),
             Column::make('addmission_code'),
             Column::make('merit_round_id'),
-            Column::make('status'),
         ];
     }
 

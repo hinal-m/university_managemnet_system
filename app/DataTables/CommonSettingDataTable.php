@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\CommonSetting;
+use App\Models\Subject;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -28,7 +29,8 @@ class CommonSettingDataTable extends DataTable
                     return $result;
             })
             ->editColumn('subject_id', function ($data) {
-                return $data->Subject->name ?? '-';
+                $subject = Subject::where('id',$data->id)->pluck('name')->toArray();
+                return $subject;
             })
             ->rawColumns(['action','subject_id'])
             ->addIndexColumn();
@@ -42,7 +44,7 @@ class CommonSettingDataTable extends DataTable
      */
     public function query(CommonSetting $model)
     {
-        return $model->newQuery()->with('Subject');
+        return $model->newQuery();
     }
 
     /**
@@ -76,7 +78,7 @@ class CommonSettingDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('subject_id')->title('Subject')->name('Subject.name'),
+            Column::make('subject_id')->title('Subject'),
             Column::make('marks'),
             Column::computed('action')
         ];
