@@ -71,55 +71,30 @@
     <script>
         $(document).ready(function() {
             $('#submit_form').validate({
-                // rules: {
-                //     name: {
-                //         required: true,
-                //     },
-                //     email: {
-                //         required: true,
-                //         email: true
+                rules: {
+                    course_id: {
+                            required: true,
+                        },
+                        reserved_seat: {
+                            required: true,
+                            digits: true
+                        },
+                        merit_seat: {
+                            required: true,
+                            digits: true
+                        },
 
-                //     },
-                //     address: {
-                //         required: true,
-
-                //     },
-                //     contact: {
-                //         required: true,
-                //         maxlength: 10,
-                //         digits: true
-                //     },
-                //     password: {
-                //         required: true,
-                //     },
-                //     cpassword: {
-                //         required: true,
-                //         equalTo: "#password"
-                //     },
-                //     logo:{
-                //         required:true
-                //     }
-
-                // },
+                },
                 messages: {
-                    'name': {
-                        'required': 'Please Enter  Name'
-                    },
-                    'email': {
-                        'required': 'Please Enter Email'
-                    },
-                    'contact': {
-                        'required': 'Please Enter Mobile No'
-                    },
-                    'password': {
-                        'required': 'Please Enter Password'
-                    },
-                    'cpassword': {
-                        'required': 'Please Confirm Password'
-                    },
-                    'logo': {
-                        'required': 'Please select logo'
-                    }
+                    'course_id': {
+                            'required': 'Please Select Course'
+                        },
+                        'reserved_seat': {
+                            'required': 'Please Enter Reserved seat'
+                        },
+                        'merit_seat': {
+                            'required': 'Please Enter Merit Seat'
+                        },
                 },
                 highlight: function(element, errorClass, validClass) {
                     $(element).addClass("is-invalid").removeClass("is-valid");
@@ -141,7 +116,7 @@
             var formData = new FormData(form[0]);
             swal({
                 title: "Are you sure?",
-                text: "you want to Insert College",
+                text: "you want to Insert College Course",
             }).then((result) => {
                 if (result) {
                     $.ajax({
@@ -158,8 +133,8 @@
                         cache: false,
                         success: function(query) {
                             if (query) {
-                                swal("Inserted!",
-                                    "College Inserted Successfully.",
+                                swal("Updated!",
+                                    "College Course Updated Successfully.",
                                     "success");
                                 window.location.href =
                                     "{{ route('college.course.index') }}";

@@ -25,7 +25,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta name="keywords"
         content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Login Page - Apex responsive bootstrap 4 admin template</title>
+    <title>College Login</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('saller-assets/app-assets/img/ico/favicon.ico') }}">
     <link rel="shortcut icon" type="image/png" href="{{ asset('saller-assets/app-assets/img/ico/favicon-32.png') }}">
     <meta name="apple-mobile-web-app-capable" content="yes">

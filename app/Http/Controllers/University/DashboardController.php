@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\University;
 
 use App\Http\Controllers\Controller;
+use App\Models\Addmission;
+use App\Models\College;
 use App\Models\University;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +16,15 @@ class DashboardController extends Controller
     public function dashboard()
     {
         return view('University.layouts.content');
+    }
+
+    public function index()
+    {
+        $college = College::all()->count();
+        // dd($college);
+        $student = User::all()->count();
+        $admission = Addmission::all()->count();
+        return view('University.layouts.content',compact(['college','student','admission']));
     }
 
     //change password

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\College;
 
+use App\DataTables\AdmissionCotaDataTable;
+use App\DataTables\CollegeAdmissionDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Addmission;
 use App\Models\College;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,5 +78,17 @@ class DashboardController extends Controller
          }
          $save = $college->save();
          return response()->json([ 'data' => $save]);
+      }
+
+      public function index(CollegeAdmissionDataTable $dataTable)
+      {
+            $addmission = Addmission::all();
+            return $dataTable->render('College.admission.index');
+      }
+
+      public function cotaAdmission(AdmissionCotaDataTable $dataTable)
+      {
+        $addmission = Addmission::all();
+        return $dataTable->render('College.admission.index');
       }
 }

@@ -1,6 +1,5 @@
 @extends('College.layouts.master')
-@section('title', 'Courses')
-
+@section('title', 'College Merit')
 @section('content')
     @dd($college_merit)
     <div class="content-overlay"></div>

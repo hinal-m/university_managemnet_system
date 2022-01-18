@@ -25,7 +25,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta name="keywords"
         content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Register Page - Apex responsive bootstrap 4 admin template</title>
+    <title>College Register</title>
     <link rel="shortcut icon" type="image/x-icon" href="../app-assets/img/ico/favicon.ico">
     <link rel="shortcut icon" type="image/png" href="../app-assets/img/ico/favicon-32.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -108,7 +108,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                         <h4 class="card-title mb-2">College Register</h4>
                                                         <p>Fill the below form to create a new account.</p>
                                                         <input type="text" class="form-control mb-2" name="name"
-                                                        value="{{old('email')}}" placeholder="Name">
+                                                        value="{{old('name')}}" placeholder="Name">
                                                             @error('name')
                                                             <span class="text-danger" role="alert">
                                                                 <strong>{{ $message }}</strong>

@@ -1,17 +1,18 @@
 @extends('College.layouts.master')
-@section('title', 'College Merit')
+@section('title', 'Admission')
+
 @section('content')
 <div class="content-overlay"></div>
 <div class="content-wrapper">
    <div class="row">
       <div class="col-12">
-         <div class="content-header">Course Table</div>
+         <div class="content-header">Admission Table</div>
       </div>
       <div class="text-right">
-         <div class="mb-2">
-            <a href="{{route('college.merit.create')}}" class="btn gradient-pomegranate big-shadow">Add Courses</a>
-         </div>
-      </div>
+        <div class="mb-2">
+           {{-- <a href="{{route('college.course.create')}}" class="btn gradient-pomegranate big-shadow">Add Courses</a> --}}
+        </div>
+     </div>
    </div>
    <!-- Zero configuration table -->
    <section id="configuration">
@@ -19,7 +20,7 @@
          <div class="col-12 gradient-man-of-steel d-block rounded">
             <div class="card">
                <div class="card-header">
-                  <h4 class="card-title">Store List</h4>
+                  <h4 class="card-title">Admission List</h4>
                </div>
                <div class="card-content">
                   <div class="card-body">
@@ -46,7 +47,7 @@
         var el = this;
         swal({
                 title: "Are you sure?",
-                text: "You Want To Delete The College Merit!",
+                text: "You Want To Delete The College Course!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -57,7 +58,7 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: "{{ route('college.merit_delete') }}",
+                        url: "{{ route('college.delete') }}",
                         type: 'POST',
                         dataType: "JSON",
                         data: {
@@ -66,13 +67,13 @@
                         cache: false,
                         success: function(data) {
                             if (data) {
-                                window.LaravelDataTables["collegemerit-table"].draw();
+                                window.LaravelDataTables["collegecourse-table"].draw();
                             } else {
                                 swal("oops!", "Something went wrong", "error");
                             }
                         }
                     });
-                    swal("College Merit has been deleted!", {
+                    swal("College Course has been deleted!", {
                         icon: "success",
                     });
                 } else {

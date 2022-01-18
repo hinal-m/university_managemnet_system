@@ -37,6 +37,9 @@ class MeritRoundRequest extends FormRequest
         return [
             'course_id.required' => 'Please select Course',
             'round_no.required' => 'Please Enter Seat No',
+            'start_date.required' => 'Please Select Start Date',
+            'end_date.required' => 'Please Select End Date',
+            'marit_result.required' => 'Please Select Declare Date',
             'round_no.numeric' => 'Please Enter Only Number',
         ];
     }

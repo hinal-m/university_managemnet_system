@@ -165,7 +165,7 @@
                                 </span>
                                 @enderror
                             </div>
-                            <button class="button login__submit">
+                            <button type="submit" class="button login__submit">
                                 <span class="button__text">Register</span>
                             </button>
                         </form>
@@ -176,12 +176,12 @@
 
     </div>
 </body>
-<script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
-
 <script>
     $(function() {
         $("#dob").datepicker();

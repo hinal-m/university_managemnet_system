@@ -1,4 +1,5 @@
 @extends('University.layouts.master')
+@section('title', 'Merit')
 @section('content')
     <div class="main-panel">
         <div class="content-wrapper">

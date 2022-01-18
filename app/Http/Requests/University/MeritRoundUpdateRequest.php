@@ -38,6 +38,9 @@ class MeritRoundUpdateRequest extends FormRequest
             'course_id.required' => 'Please select Course',
             'round_no.required' => 'Please Enter Seat No',
             'round_no.numeric' => 'Please Enter Only Number',
+            'start_date.required' => 'Please Select Start Date',
+            'end_date.required' => 'Please Select End Date',
+            'marit_result.required' => 'Please Select Declare Date',
         ];
     }
 }

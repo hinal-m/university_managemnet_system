@@ -8,6 +8,7 @@ use App\Http\Controllers\University\CourseController;
 use App\Http\Controllers\University\LoginController;
 use App\Http\Controllers\University\MaritRoundController;
 use App\Http\Controllers\University\StudentController;
+use App\Http\Controllers\University\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,9 +33,9 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('check', [LoginController::class, 'check'])->name('university.check');
 });
 
-Route::group(['middleware' => 'auth:university'], function () {
+// Route::group(['middleware' => 'auth:university'], function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('university.logout');
 
 
@@ -70,7 +71,11 @@ Route::group(['middleware' => 'auth:university'], function () {
     //admission
     Route::get('admission',[AddmissionController::class,'index'])->name('admission_list');
 
+    //subject
+    Route::get('subject',[SubjectController::class,'index'])->name('subject_list');
 
 
 
-});
+
+
+// });

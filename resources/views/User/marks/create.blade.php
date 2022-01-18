@@ -1,6 +1,5 @@
 @extends('User.layouts.master')
-@section('title', 'Courses')
-
+@section('title', 'Student Marks')
 @section('content')
     {{-- @dd($student_mark) --}}
     <div class="content-overlay"></div>

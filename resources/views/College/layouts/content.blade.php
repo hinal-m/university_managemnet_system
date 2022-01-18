@@ -1,6 +1,7 @@
 @extends('College.layouts.master')
-@section('title', 'Seller-Dashbboard')
+@section('title', 'College-Dashbboard')
 @section('content')
+
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <!--Statistics cards Starts-->

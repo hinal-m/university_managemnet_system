@@ -1,9 +1,6 @@
 @extends('User.layouts.master')
-@section('title', 'Courses')
-
+@section('title', 'Admission')
 @section('content')
-{{-- @dd($addmission) --}}
-{{-- @dd($addmission['college']); --}}
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="row">
@@ -19,26 +16,18 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
+                                @if($round)
                                 <form id="submit_form" action="{{ route('user.addmission.store') }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="form-group mb-2">
-                                        <label for="basic-form-6">Collge</label>
+                                        <label for="basic-form-6">College</label>
 
                                         <select id="college_id" name="college_id[]" class="form-control" multiple>
                                             <option value="" selected disabled>Select College</option>
                                             @foreach ($addmission['college'] as $value)
-                                                <option value="{{ $value->id }}" {{ (isset($addmission['addmission']->college_id) ? (in_array($value->id, explode(',', $addmission['addmission']->college_id)) ? 'selected' : '') : '') }}>{{ $value->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label for="basic-form-6">Merit Round</label>
-                                        <select id="merit_round_id" name="merit_round_id" class="form-control course">
-                                            <option value="" selected disabled>Select Course</option>
-                                            @foreach ($addmission['merit_round'] as $value)
-                                                <option value="{{ $value->id }}" {{ isset($addmission['addmission']->merit_round_id) ? (($value->id == $addmission['addmission']->merit_round_id) ? 'selected' : '') : '' }}>{{ $value->round_no }}</option>
+                                                <option value="{{ $value->id }}" {{ (isset($addmission['addmission']->college_id) ? (in_array($value->id, $addmission['addmission']->college_id) ? 'selected' : '') : '') }}>{{ $value->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -57,6 +46,10 @@
                                     <a type="button" href="" class="btn btn-secondary"><i
                                             class="ft-x mr-1"></i>Cancel</a>
                                 </form>
+                                @else
+                                <h1>Admission Process Date Over </h1>
+
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -74,28 +67,23 @@
             $(document).ready(function() {
                 $('#submit_form').validate({
                     rules: {
-                        // course_id: {
-                        //     required: true,
-                        // },
-                        // reserved_seat: {
-                        //     required: true,
-                        //     digits: true
-                        // },
-                        // merit_seat: {
-                        //     required: true,
-                        //     digits: true
-                        // },
+                        'college_id[]': {
+                            required: true,
+                        },
+                        course_id: {
+                            required: true,
+                        },
 
                     },
                     messages: {
+                        'college_id[]': {
+                            'required': 'Please Select College'
+                        },
+                        'merit_round_id': {
+                            'required': 'Please Select Merit Round'
+                        },
                         'course_id': {
                             'required': 'Please Select Course'
-                        },
-                        'reserved_seat': {
-                            'required': 'Please Enter Reserved seat'
-                        },
-                        'merit_seat': {
-                            'required': 'Please Enter Merit Seat'
                         },
                     },
                     highlight: function(element, errorClass, validClass) {
@@ -135,21 +123,21 @@
                             cache: false,
                             success: function(query) {
                                 if (query) {
-                                    swal("Inserted!",
-                                        "Course Inserted Successfully.",
+                                    swal(
+                                        "Admission Saved Successfully.",
                                         "success");
                                     window.location.href =
                                         "{{ route('user.addmission.create') }}";
                                 }
                             },
-                            error: function(data) {
-                                $.each(data.responseJSON.errors, function(
-                                    key, value) {
-                                    $('[name=' + key + ']').after(
-                                        '<span class="text-strong" style="color:red">' +
-                                        value + '</span>')
-                                });
-                            }
+                            // error: function(data) {
+                            //     $.each(data.responseJSON.errors, function(
+                            //         key, value) {
+                            //         $('[name=' + key + ']').after(
+                            //             '<span class="text-strong" style="color:red">' +
+                            //             value + '</span>')
+                            //     });
+                            // }
                         });
                     } else {
                         swal("Cancelled", "Your record is safe :)", "error");

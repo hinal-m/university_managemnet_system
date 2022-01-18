@@ -1,7 +1,7 @@
 <div class="app-sidebar menu-fixed" data-background-color="man-of-steel" data-image="{{ asset('saller-assets/app-assets/img/sidebar-bg/01.jpg') }}" data-scroll-to-active="true">
    <div class="sidebar-header">
       <div class="logo clearfix"><a class="logo-text float-left" href="{{route('college.dashboard')}}">
-            <div class="logo-img">College Panel</div>
+            <div class="logo-img">College</div>
 
          </a><a class="nav-toggle d-none d-lg-none d-xl-block" id="sidebarToggle" href="javascript:;"><i class="toggle-icon ft-toggle-right" data-toggle="expanded"></i></a><a class="nav-close d-block d-lg-block d-xl-none" id="sidebarClose" href="javascript:;"><i class="ft-x"></i></a></div>
    </div>
@@ -28,6 +28,18 @@
                <a href="{{route('college.merit.index')}}" class="text-decoration-none">
                   <i class="fa fa-shopping-basket"></i>
                   <span class="menu-title" data-i18n="Email">College Merit</span>
+               </a>
+            </li>
+            <li class="{{ request()->is('*index*') ? 'active' : '' }}">
+               <a href="{{route('college.index')}}" class="text-decoration-none">
+                  <i class="fa fa-shopping-basket"></i>
+                  <span class="menu-title" data-i18n="Email">Admission Show</span>
+               </a>
+            </li>
+            <li class="{{ request()->is('*list*') ? 'active' : '' }}">
+               <a href="{{route('college.list')}}" class="text-decoration-none">
+                  <i class="fa fa-shopping-basket"></i>
+                  <span class="menu-title" data-i18n="Email">Admission Cota</span>
                </a>
             </li>
          </ul>

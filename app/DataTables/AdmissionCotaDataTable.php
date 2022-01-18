@@ -3,14 +3,17 @@
 namespace App\DataTables;
 
 use App\Models\Addmission;
+use App\Models\AdmissionCotum;
 use App\Models\College;
+use App\Models\CollegeMerit;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class AddmissionDataTable extends DataTable
+class AdmissionCotaDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,6 +25,7 @@ class AddmissionDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+
             ->editColumn('course_id', function ($data) {
                 return $data->Course->name ?? '-';
             })
@@ -39,12 +43,25 @@ class AddmissionDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Addmission $model
+     * @param \App\Models\AdmissionCotum $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Addmission $model)
     {
-        return $model->newQuery();
+
+        // $user = Auth::user()->id;
+        // $college_merit = CollegeMerit::where('college_id', Auth::user()->id)->first();
+        // if ($college_merit) {
+        //     return
+        //         $model->where('merit', '>=', $college_merit->merit)
+        //         ->where('college_id', 'like', '%"' . $user . '"%')
+        //         ->newQuery();
+        // }
+
+            $college_id = Auth::guard('college')->user()->id;
+            $model = $model::where('college_id', 'like', '%"' . $college_id . '"%');
+
+        return $model->with('course')->with('meritRound')->with('user')->newQuery();
     }
 
     /**
@@ -55,18 +72,18 @@ class AddmissionDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('addmission-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+            ->setTableId('admissioncota-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(1)
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -79,13 +96,12 @@ class AddmissionDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('college_id'),
-            Column::make('course_id'),
-            Column::make('user_id'),
+            Column::make('course_id')->name('course.name'),
+            Column::make('user_id')->name('user.name'),
             Column::make('merit'),
             Column::make('addmission_date'),
             Column::make('addmission_code'),
-            Column::make('merit_round_id'),
-            Column::make('status'),
+            Column::make('merit_round_id')->name('meritRound.round_no'),
         ];
     }
 
@@ -96,6 +112,6 @@ class AddmissionDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Addmission_' . date('YmdHis');
+        return 'AdmissionCota_' . date('YmdHis');
     }
 }

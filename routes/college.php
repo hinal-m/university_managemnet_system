@@ -55,6 +55,10 @@ Route::group(['middleware' => 'auth:college'], function () {
     Route::post('round', [CollegeMeritController::class,'getRound'])->name('round');
     Route::post('merit-delete',     [CollegeMeritController::class, 'destroy'])->name('merit_delete');
 
+    //admission
+    Route::get('admission',[DashboardController::class,'index'])->name('index');
+    Route::get('list',[DashboardController::class,'cotaAdmission'])->name('list');
+
 
 
 

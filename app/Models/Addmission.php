@@ -12,15 +12,22 @@ class Addmission extends Model
     protected $fillable = [
         'user_id',
         'college_id',
+        'course_id',
+        'merit_round_id',
+        'merit',
         'addmission_date',
         'addmission_code',
         'status',
     ];
 
-    public function college()
-    {
-        return $this->belongsTo(College::class, 'college_id');
-    }
+    protected $casts = [
+        'college_id' => 'array'
+    ];
+
+    // public function college()
+    // {
+    //     return $this->belongsTo(College::class,'college_id');
+    // }
     public function meritRound()
     {
         return $this->belongsTo(MeritRound::class, 'merit_round_id');
@@ -29,7 +36,11 @@ class Addmission extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
-   
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 
 
 }

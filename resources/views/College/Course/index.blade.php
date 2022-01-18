@@ -47,7 +47,7 @@
         var el = this;
         swal({
                 title: "Are you sure?",
-                text: "You Want To Delete The Course!",
+                text: "You Want To Delete The College Course!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -73,7 +73,7 @@
                             }
                         }
                     });
-                    swal("Course has been deleted!", {
+                    swal("College Course has been deleted!", {
                         icon: "success",
                     });
                 } else {

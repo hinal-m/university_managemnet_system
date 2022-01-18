@@ -42,7 +42,7 @@
                                             name="reserved_seat">
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="seat_no">Merit No</label>
+                                        <label for="seat_no">Merit Seat</label>
                                         <input type="text" id="merit_seat" class="form-control"
                                             data-validation-required-message="This First Name field is required"
                                             name="merit_seat">
@@ -115,7 +115,7 @@
                 var formData = new FormData(form[0]);
                 swal({
                     title: "Are you sure?",
-                    text: "you want to Insert Course",
+                    text: "you want to Insert College Course",
                 }).then((result) => {
                     if (result) {
                         $.ajax({
@@ -133,7 +133,7 @@
                             success: function(query) {
                                 if (query) {
                                     swal("Inserted!",
-                                        "Course Inserted Successfully.",
+                                        "College Course Inserted Successfully.",
                                         "success");
                                     window.location.href =
                                         "{{ route('college.course.index') }}";

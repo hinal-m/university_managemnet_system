@@ -15,6 +15,11 @@ class DashboardController extends Controller
         return view('User.layouts.content');
     }
 
+    public function index()
+    {
+        return view('User.layouts.content');
+    }
+
      //change password
      public function showChangePasswordGet()
      {
@@ -22,7 +27,6 @@ class DashboardController extends Controller
      }
      public function changePasswordPosts(Request $request)
      {
-         dd(1);
          if (!(Hash::check($request->get('current-password'), Auth::user('user')->password))) {
              // The passwords matches
              return redirect()->back()->with("error", "Your current password does not matches with the password.");
@@ -42,7 +46,6 @@ class DashboardController extends Controller
          //Change Password
 
          $user = User::where('id', Auth::user()->id)->first();
-         dd($user);
          $user->password = Hash::make($request->get('new-password'));
          $user->save();
 

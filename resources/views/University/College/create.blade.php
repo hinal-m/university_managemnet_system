@@ -1,4 +1,5 @@
 @extends('University.layouts.master')
+@section('title', 'College')
 @section('content')
     <div class="main-panel">
         <div class="content-wrapper">
@@ -137,6 +138,9 @@
                         },
                         'email': {
                             'required': 'Please Enter Email'
+                        },
+                        'address': {
+                            'required': 'Please Enter Address'
                         },
                         'contact': {
                             'required': 'Please Enter Mobile No'

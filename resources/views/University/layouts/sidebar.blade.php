@@ -1,6 +1,6 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-        <a class="sidebar-brand brand-logo" style="color:white" href="{{route('university.dashboard')}}">University</a>
+        <a class="sidebar-brand brand-logo" style="color:white" href="{{route('university.dashboard')}}">UNIVERSITY</a>
         <a class="sidebar-brand brand-logo-mini" href=""><img
                 src="{{ asset('assets/images/logo-mini.svg') }}" alt="logo" /></a>
     </div>
@@ -98,12 +98,20 @@
                     <span class="menu-title">Course</span>
                 </a>
             </li>
-            <li class="nav-item menu-items {{ request()->is('*course-list*') ? 'active' : '' }}">
+            <li class="nav-item menu-items {{ request()->is('*subject*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('university.subject_list')}}">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-speedometer"></i>
+                    </span>
+                    <span class="menu-title">Subject</span>
+                </a>
+            </li>
+            <li class="nav-item menu-items {{ request()->is('*marit*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('university.marit.index')}}">
                     <span class="menu-icon">
                         <i class="mdi mdi-speedometer"></i>
                     </span>
-                    <span class="menu-title">MArit Round</span>
+                    <span class="menu-title">Marit Round</span>
                 </a>
             </li>
             <li class="nav-item menu-items {{ request()->is('*admission*') ? 'active' : '' }}">
@@ -111,7 +119,7 @@
                     <span class="menu-icon">
                         <i class="mdi mdi-speedometer"></i>
                     </span>
-                    <span class="menu-title">MArit Round</span>
+                    <span class="menu-title">Admission</span>
                 </a>
             </li>
     </ul>

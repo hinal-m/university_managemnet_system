@@ -80,7 +80,7 @@ class CollegeCourseDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('course_id')->name('Course.name'),
+            Column::make('course_id')->name('Course.name')->title('Course Name'),
             Column::make('reserved_seat'),
             Column::make('merit_seat'),
             Column::make('seat_no'),

@@ -32,7 +32,7 @@ Route::group(['namespace' => 'Auth'], function () {
 
 Route::group(['middleware' => 'auth:user'], function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     //Change Password

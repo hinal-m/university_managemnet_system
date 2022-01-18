@@ -1,4 +1,5 @@
 @extends('University.layouts.master')
+@section('title', 'College')
 @section('content')
     <div class="main-panel">
         <div class="content-wrapper">
@@ -169,7 +170,7 @@
                             cache: false,
                             success: function(query) {
                                 if (query) {
-                                    swal("Inserted!",
+                                    swal("Updated!",
                                         "College Updated Successfully.",
                                         "success");
                                     window.location.href =
