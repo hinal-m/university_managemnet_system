@@ -3,10 +3,20 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AdmissionConfirmMail;
+use App\Models\Addmission;
+use App\Models\AddmissionConfirmation;
+use App\Models\College;
+use App\Models\CollegeCourse;
+use App\Models\CollegeMerit;
+use App\Models\MeritRound;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
@@ -15,53 +25,122 @@ class DashboardController extends Controller
         return view('User.layouts.content');
     }
 
+
+    //User Message
     public function index()
     {
-        return view('User.layouts.content');
+        $toDate = Carbon::now()->format('Y-m-d');
+        $declare_date = MeritRound::where('merit_result_declare_date', '=', $toDate)->get()->toArray();
+        $admission = Addmission::where('user_id', Auth::guard('user')->user()->id)->first();
+        $admission_college = Addmission::where('user_id', Auth::guard('user')->user()->id)->pluck('college_id')->toArray();
+        $collegemerit = [];
+        $message = '';
+        // dd($admission_college);
+        if (!empty($admission_college)) {
+
+            $first =  reset($admission_college[0]);
+
+            $collegeInfo = CollegeMerit::whereIn('college_id', $admission_college[0])->where('merit', '<=', $admission->merit)->get();
+            // dd($collegeInfo);
+
+            if (count($collegeInfo) == 0) {
+
+                // $collegemerit = college::where('id', $first)->first(['id', 'name']);
+                $message = "Sorry !! You Not Selected || For This Round";
+            } else {
+                $collegemerit = college::where('id', $collegeInfo[0]->college_id)->first();
+            }
+            // dd($collegemerit);
+
+            return view('User.layouts.content', compact('declare_date', 'collegemerit', 'message','admission'));
+        }
+        return view('User.layouts.content', compact('declare_date'));
     }
 
-     //change password
-     public function showChangePasswordGet()
-     {
-         return view('User.Auth.ChangePassword');
-     }
-     public function changePasswordPosts(Request $request)
-     {
-         if (!(Hash::check($request->get('current-password'), Auth::user('user')->password))) {
-             // The passwords matches
-             return redirect()->back()->with("error", "Your current password does not matches with the password.");
-         }
 
-         if (strcmp($request->get('current-password'), $request->get('new-password')) == 0) {
-             // Current password and new password same
-             return redirect()->back()->with("error", "New Password cannot be same as your current password.");
-         }
+    //Confirm Admission
+    public function confirm(Request $request)
+    {
+        // dd($request->id);
+        $userInfo = Addmission::where('user_id', Auth::user()->id)->first();
+        // dd($userInfo->course_id);
+        // if($request->id == '2'){
+        //     $userInfo->status = '2';
+        // }
+        $userInfo->save();
+        $collegeCourse = CollegeCourse::where('college_id', $request->id)->where('course_id', $userInfo->course_id)->select('merit_seat')->first();
+        // dd($collegeCourse);
+        $addmissionConfirmation = AddmissionConfirmation::where('confirm_college_id', $request->college_id)->where('confirm_round_id', $request->merit_round_id)->where('confirmation_type', 'M')->get();
+        // dd($addmissionConfirmation);
+        if ($collegeCourse->merit_seat >= count($addmissionConfirmation)) {
 
-         $validatedData = $request->validate([
-             'current-password' => 'required',
-             'new-password' => 'required|string|min:8',
-             'confirm_password' => 'required|same:new-password'
-         ]);
+            $user_id = User::where('id', $userInfo->user_id)->first();
 
-         //Change Password
+            $admission_confirm = AddmissionConfirmation::create([
+                'addmission_id' => $userInfo->id,
+                'confirm_college_id' => $request['id'],
+                'confirm_round_id' => $userInfo->merit_round_id,
+                'confirm_merit' => $userInfo->merit,
+                'confirmation_type' => 'M',
+            ]);
 
-         $user = User::where('id', Auth::user()->id)->first();
-         $user->password = Hash::make($request->get('new-password'));
-         $user->save();
+            Mail::to($user_id->email)->send(new AdmissionConfirmMail($admission_confirm));
 
-         return redirect()->back()->with("success", "Password successfully changed!");
-     }
+            Addmission::where('id', $userInfo->id)->update([
+                'status' => '1'
+            ]);
+            MeritRound::where('id', $userInfo->merit_round_id)->update([
+                'status' => '0'
+            ]);
+        } else {
 
-     //Profile
+        }
 
-     public function showProfile($id)
-     {
-         $user = User::find($id);
-         return view('User.Auth.Profile',compact('user'));
-     }
+        return response()->json(['data' => $admission_confirm]);
+    }
 
-     public function editProfile(Request $request)
-     {
+    //change password
+    public function showChangePasswordGet()
+    {
+        return view('User.Auth.ChangePassword');
+    }
+    public function changePasswordPosts(Request $request)
+    {
+        if (!(Hash::check($request->get('current-password'), Auth::user('user')->password))) {
+            // The passwords matches
+            return redirect()->back()->with("error", "Your current password does not matches with the password.");
+        }
+
+        if (strcmp($request->get('current-password'), $request->get('new-password')) == 0) {
+            // Current password and new password same
+            return redirect()->back()->with("error", "New Password cannot be same as your current password.");
+        }
+
+        $validatedData = $request->validate([
+            'current-password' => 'required',
+            'new-password' => 'required|string|min:8',
+            'confirm_password' => 'required|same:new-password'
+        ]);
+
+        //Change Password
+
+        $user = User::where('id', Auth::user()->id)->first();
+        $user->password = Hash::make($request->get('new-password'));
+        $user->save();
+
+        return redirect()->back()->with("success", "Password successfully changed!");
+    }
+
+    //Profile
+
+    public function showProfile($id)
+    {
+        $user = User::find($id);
+        return view('User.Auth.Profile', compact('user'));
+    }
+
+    public function editProfile(Request $request)
+    {
         $user = User::find(Auth::user()->id);
 
         $user->name = $request->name;
@@ -82,6 +161,6 @@ class DashboardController extends Controller
             $images = $user->getRawOriginal('image');
         }
         $save = $user->save();
-        return response()->json([ 'data' => $save]);
-     }
+        return response()->json(['data' => $save]);
+    }
 }

@@ -83,7 +83,7 @@ class CollegeDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('name'),
             Column::make('email'),
             Column::make('address'),

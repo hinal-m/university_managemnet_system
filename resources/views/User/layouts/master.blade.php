@@ -52,6 +52,7 @@
     <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     @stack('css')
     <style>
+        
         .error {
             color: red;
         }

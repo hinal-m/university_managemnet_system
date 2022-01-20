@@ -67,6 +67,9 @@
         .validation {
             color: red;
         }
+        #admissioncota-table {
+            width: 1220px !important;
+        }
     </style>
     <!-- END: Custom CSS-->
 </head>

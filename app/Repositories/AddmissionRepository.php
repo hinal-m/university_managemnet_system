@@ -42,6 +42,18 @@ class AddmissionRepository implements AddmissionInterface
 
     public function store(array $data)
     {
+        for($i=0;$i<count($data['id']);$i++)
+        {
+            StudentMark::updateOrCreate([
+                'subject_id'=> $data['id'][$i],
+                'user_id' => Auth::guard('user')->user()->id,
+            ],[
+                'subject_id'=> $data['id'][$i],
+                'user_id' => Auth::guard('user')->user()->id,
+                'total_mark'=>'100',
+                'obtain_mark'=>$data['mark'][$i]
+            ]);
+        }
         $student_mark = StudentMark::with('commonSetting')->where('user_id',Auth::guard('user')->user()->id)->get();
         $total_common_setting_mark = CommonSetting::sum('marks');
         $total_marks=0;
@@ -54,19 +66,29 @@ class AddmissionRepository implements AddmissionInterface
         $merit = ($total_marks / $total_common_setting_mark) * 100;
 
         $course_name = Course::where('id', $data['course_id'])->pluck('name')->first();
+        $toDate = Carbon::now()->format('Y-m-d');
+
+        $round = MeritRound::where('course_id',$data['course_id'])->where('status','1')->where('merit_result_declare_date', '=', $toDate)->latest()->pluck('round_no')->first();
+        // dd($round);
 
         $addmission = Addmission::updateOrCreate([
             'user_id' => Auth::guard('user')->user()->id,
         ],[
             'college_id'=> (array)$data['college_id'],
             'user_id' => Auth::guard('user')->user()->id,
-            'merit' => $merit,
+            'merit' => round($merit,2),
             'course_id'=> $data['course_id'],
-            'merit_round_id'=>'1',
+            'merit_round_id'=>$round,
             'addmission_date'=>date('y/m/d'),
             'addmission_code'=>Str::upper($course_name).date('ymd').Auth::guard('user')->user()->id,
-            'status' => '1'
+            'status' => '3'
         ]);
+
         return $addmission;
     }
+
+    // public function reservedConfirm(array $data)
+    // {
+    //     dd($data);
+    // }
 }

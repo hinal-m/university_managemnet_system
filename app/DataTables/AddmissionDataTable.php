@@ -29,10 +29,17 @@ class AddmissionDataTable extends DataTable
                 return $data->user->name ?? '-';
             })
             ->editColumn('college_id', function ($data) {
-                $college = College::whereIn('id',$data->college_id)->pluck('name')->toArray();
-                return implode('<br>',$college);
+                $college = College::whereIn('id', $data->college_id)->pluck('name')->toArray();
+                return implode('<br>', $college);
             })
-            ->rawColumns(['course_id','college_id'])
+            ->editColumn('status', function ($data) {
+                if ($data->status == '0') {
+                    return '<a style="color:white" class="badge badge-pill-lg badge-warning status">Next</a>';
+                } else {
+                    return '<a style="color:white" width="70px" class="badge badge-pill-lg badge-success status">Confirm</a>';
+                }
+            })
+            ->rawColumns(['course_id', 'college_id','status','user_id'])
             ->addIndexColumn();
     }
 
@@ -55,18 +62,18 @@ class AddmissionDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('addmission-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+            ->setTableId('addmission-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(1)
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -77,7 +84,7 @@ class AddmissionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('college_id'),
             Column::make('course_id'),
             Column::make('user_id'),
@@ -85,6 +92,7 @@ class AddmissionDataTable extends DataTable
             Column::make('addmission_date'),
             Column::make('addmission_code'),
             Column::make('merit_round_id'),
+            Column::make('status'),
         ];
     }
 

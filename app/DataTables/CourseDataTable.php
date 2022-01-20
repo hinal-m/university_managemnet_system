@@ -73,7 +73,7 @@ class CourseDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::computed('name'),
             Column::computed('status'),
         ];

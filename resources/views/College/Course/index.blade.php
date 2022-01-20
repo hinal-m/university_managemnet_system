@@ -44,6 +44,7 @@
     <script>
         $(document).on('click', '.delete', function() {
         var id = $(this).data('id');
+        alert(id);
         var el = this;
         swal({
                 title: "Are you sure?",
@@ -64,8 +65,8 @@
                         data: {
                             'id': id,
                         },
-                        cache: false,
                         success: function(data) {
+                            alert(data);
                             if (data) {
                                 window.LaravelDataTables["collegecourse-table"].draw();
                             } else {

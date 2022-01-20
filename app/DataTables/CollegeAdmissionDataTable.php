@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Addmission;
+use App\Models\AddmissionConfirmation;
 use App\Models\College;
 use App\Models\CollegeAdmission;
 use App\Models\CollegeMerit;
@@ -21,27 +22,29 @@ class CollegeAdmissionDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('course_id', function ($data) {
-                return $data->Course->name ?? '-';
+            ->editColumn('addmission_id', function ($data) {
+
+                $addmission = Addmission::where('id',$data->addmission_id)->pluck('addmission_code')->first();
+                return $addmission;
             })
-            ->editColumn('user_id', function ($data) {
-                return $data->user->name ?? '-';
+            ->editColumn('confirmation_type', function ($data) {
+                if ($data->confirmation_type == 'M') {
+                    return '<a style="color:white" width="70px" class="badge badge-pill-lg badge-success status">Marit Base</a>';
+                } else{
+                    return '<a style="color:white" class="badge badge-pill-lg badge-warning status">Reserved base</a>';
+                }
             })
-            ->editColumn('college_id', function ($data) {
-                $college = College::whereIn('id',$data->college_id)->pluck('name')->toArray();
-                return implode('<br>',$college);
-            })
-            ->rawColumns(['course_id','college_id'])
+            ->rawColumns(['addmission_id','confirmation_type'])
             ->addIndexColumn();
     }
 
-    public function query(Addmission $model)
+    public function query(AddmissionConfirmation $model)
     {
         // dd($model);
-        $college = CollegeMerit::where('college_id',Auth::guard('college')->user()->id)->select('merit')->first()->toArray();
+        // $college = AddmissionConfirmation::where('confirm_college_id',Auth::guard('college')->user()->id)->first();
 
 
-        return $model->where('merit','>=',$college['merit'])->with('course')->with('meritRound')->with('user')->newQuery();
+        return $model->where('confirm_college_id',Auth::guard('college')->user()->id)->newQuery();
     }
 
     public function html()
@@ -53,25 +56,21 @@ class CollegeAdmissionDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
+                        Button::make('excel'),
+                        Button::make('csv'),
+                        Button::make('pdf'),
                         Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
                     );
     }
 
     protected function getColumns()
     {
         return [
-            Column::make('id'),
-            Column::make('course_id')->name('course.name'),
-            Column::make('user_id')->name('user.name'),
-            Column::make('merit'),
-            Column::make('addmission_date'),
-            Column::make('addmission_code'),
-            Column::make('course_id'),
-            Column::make('merit_round_id')->title('Marit round'),
+            Column::make('id')->data('DT_RowIndex'),
+            Column::make('addmission_id')->title('admission code'),
+            Column::make('confirm_round_id'),
+            Column::make('confirm_merit'),
+            Column::make('confirmation_type'),
         ];
     }
 

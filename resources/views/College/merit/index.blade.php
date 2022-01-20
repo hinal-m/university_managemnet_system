@@ -5,11 +5,11 @@
 <div class="content-wrapper">
    <div class="row">
       <div class="col-12">
-         <div class="content-header">Course Table</div>
+         <div class="content-header">College Merit Table</div>
       </div>
       <div class="text-right">
          <div class="mb-2">
-            <a href="{{route('college.merit.create')}}" class="btn gradient-pomegranate big-shadow">Add Courses</a>
+            <a href="{{route('college.merit.create')}}" class="btn gradient-pomegranate big-shadow">Add College Merit</a>
          </div>
       </div>
    </div>
@@ -19,7 +19,6 @@
          <div class="col-12 gradient-man-of-steel d-block rounded">
             <div class="card">
                <div class="card-header">
-                  <h4 class="card-title">Store List</h4>
                </div>
                <div class="card-content">
                   <div class="card-body">

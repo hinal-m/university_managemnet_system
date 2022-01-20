@@ -33,13 +33,13 @@
             <li class="{{ request()->is('*index*') ? 'active' : '' }}">
                <a href="{{route('college.index')}}" class="text-decoration-none">
                   <i class="fa fa-shopping-basket"></i>
-                  <span class="menu-title" data-i18n="Email">Admission Show</span>
+                  <span class="menu-title" data-i18n="Email">Admission(Merit)</span>
                </a>
             </li>
             <li class="{{ request()->is('*list*') ? 'active' : '' }}">
                <a href="{{route('college.list')}}" class="text-decoration-none">
                   <i class="fa fa-shopping-basket"></i>
-                  <span class="menu-title" data-i18n="Email">Admission Cota</span>
+                  <span class="menu-title" data-i18n="Email">Admission(Reserve)</span>
                </a>
             </li>
          </ul>

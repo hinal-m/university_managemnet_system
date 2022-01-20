@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\AddmissionController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\RegisterController;
@@ -33,6 +34,7 @@ Route::group(['namespace' => 'Auth'], function () {
 Route::group(['middleware' => 'auth:user'], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/confirm', [DashboardController::class, 'confirm'])->name('confirm');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     //Change Password

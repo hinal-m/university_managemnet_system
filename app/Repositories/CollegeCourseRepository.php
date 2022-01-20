@@ -49,8 +49,10 @@ class CollegeCourseRepository implements CollegeCourseInterface
 
     public function delete(array $data)
     {
-        $college_course = CollegeCourse::find($data['id']);
-        $college_course->delete();
-        return $college_course;
+        $result = CollegeCourse::find($data['id']);
+        $result->delete();
+        // $college_course = CollegeCourse::find($data['id']);
+        // $college_course->delete();
+        return $result;
     }
 }

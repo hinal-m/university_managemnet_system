@@ -1,6 +1,7 @@
 @extends('User.layouts.master')
 @section('title', 'Admission')
 @section('content')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="row">
@@ -16,38 +17,57 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                @if($round)
-                                <form id="submit_form" action="{{ route('user.addmission.store') }}" method="post"
-                                    enctype="multipart/form-data">
-                                    @csrf
+                                @if ($round)
+                                    <form id="submit_form" action="{{ route('user.addmission.store') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <label for="basic-form-6">Please Enter Subject Marks</label><br>
+                                        @foreach ($subjects as $subject)
+                                            <input type="hidden" name="id[]" value="{{ $subject->id }}">
+                                            <div class="col-auto">
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">{{ $subject->name }}</div>
+                                                    </div>
+                                                    <input type="text" class="form-control" min="0" max="100"
+                                                        class="form-control" name="mark[]" placeholder="Marks"
+                                                        value="{{ optional($subject->userStudentMark)->obtain_mark }}">
+                                                </div><br>
+                                            </div>
+                                        @endforeach
 
-                                    <div class="form-group mb-2">
-                                        <label for="basic-form-6">College</label>
+                                        <div class="form-group">
+                                            <label for="basic-form-6">Please Select College</label>
 
-                                        <select id="college_id" name="college_id[]" class="form-control" multiple>
-                                            <option value="" selected disabled>Select College</option>
-                                            @foreach ($addmission['college'] as $value)
-                                                <option value="{{ $value->id }}" {{ (isset($addmission['addmission']->college_id) ? (in_array($value->id, $addmission['addmission']->college_id) ? 'selected' : '') : '') }}>{{ $value->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label for="basic-form-6">Course</label>
-                                        <select id="course_id" name="course_id" class="form-control course">
-                                            <option value="" selected disabled>Select Course</option>
-                                            @foreach ($addmission['course'] as $value)
-                                                <option value="{{ $value->id }}" {{ isset($addmission['addmission']->course_id) ? (($value->id == $addmission['addmission']->course_id) ? 'selected' : '') : '' }}>{{ $value->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                            <select id="college_id" name="college_id[]"
+                                                class="js-example-basic-multiple form-control" multiple="multiple">
+                                                <option value="0" selected disabled>Select College</option>
+                                                @foreach ($addmission['college'] as $value)
+                                                    <option value="{{ $value->id }}"
+                                                        {{ isset($addmission['addmission']->college_id) ? (in_array($value->id, $addmission['addmission']->college_id) ? 'selected' : '') : '' }}>
+                                                        {{ $value->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="basic-form-6">Please Select Course</label>
+                                            <select id="course_id" name="course_id" class="form-control course">
+                                                <option value="" selected disabled>Select Course</option>
+                                                @foreach ($addmission['course'] as $value)
+                                                    <option value="{{ $value->id }}"
+                                                        {{ isset($addmission['addmission']->course_id) ? ($value->id == $addmission['addmission']->course_id ? 'selected' : '') : '' }}>
+                                                        {{ $value->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-                                    <button type="submit" class="btn btn-primary mr-2"><i
-                                            class="ft-check-square mr-1"></i>Save</button>
-                                    <a type="button" href="" class="btn btn-secondary"><i
-                                            class="ft-x mr-1"></i>Cancel</a>
-                                </form>
+                                        <button type="submit" class="btn btn-primary mr-2"><i
+                                                class="ft-check-square mr-1"></i>Save</button>
+                                        <a type="button" href="" class="btn btn-secondary"><i
+                                                class="ft-x mr-1"></i>Cancel</a>
+                                    </form>
                                 @else
-                                <h1>Admission Process Date Over </h1>
+                                    <h1>Admission Process Date Over </h1>
 
                                 @endif
                             </div>
@@ -63,7 +83,30 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        {{-- <script type="text/javascript">
+            $(".js-example-basic-multiple").select2();
+        </script> --}}
         <script>
+            $('.js-example-basic-multiple').select2({
+                tags: true
+            });
+
+            $(".js-example-basic-multiple").on("select2:select", function(evt) {
+                var element = evt.params.data.element;
+                var $element = $(element);
+
+                $element.detach();
+                $(this).append($element);
+                $(this).trigger("change");
+            });
+            var thing = $(".js-example-basic-multiple").select2({
+                closeOnSelect: false
+            }).on("change", function(e) {});
+
+
+
+
             $(document).ready(function() {
                 $('#submit_form').validate({
                     rules: {

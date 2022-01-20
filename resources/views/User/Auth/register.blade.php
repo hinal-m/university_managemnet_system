@@ -139,7 +139,7 @@
                             </div>
                             <div class="login__field">
                                 <i class="login__icon fas fa-lock"></i>
-                                <input type="password" class="login__input" value="{{old('password')}}" name="password" placeholder="Password">
+                                <input type="password" class="login__input" value="{{old('password')}}" name="password" id="password" placeholder="Password">
                                 @error('password')
                                 <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -184,50 +184,52 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
 <script>
     $(function() {
-        $("#dob").datepicker();
+        $("#dob").datepicker({
+            maxDate: 0
+        });
     });
     $(document).ready(function() {
         $('#register').validate({
             rules: {
-                // name: {
-                //     required: true,
-                // },
-                // email: {
-                //     required: true,
-                //     email: true
+                name: {
+                    required: true,
+                },
+                email: {
+                    required: true,
+                    email: true
 
-                // },
-                // address: {
-                //     required: true,
+                },
+                address: {
+                    required: true,
 
-                // },
-                // adhaar_no: {
-                //     required: true,
+                },
+                adhaar_no: {
+                    required: true,
 
-                // },
-                // dob: {
-                //     required: true,
+                },
+                dob: {
+                    required: true,
 
-                // },
-                // gender: {
-                //     required: true,
+                },
+                gender: {
+                    required: true,
 
-                // },
-                // contact: {
-                //     required: true,
-                //     maxlength: 10,
-                //     digits: true
-                // },
-                // password: {
-                //     required: true,
-                // },
-                // confirm_password: {
-                //     required: true,
-                //     equalTo: "#password"
-                // },
-                // image: {
-                //     required: true
-                // }
+                },
+                contact: {
+                    required: true,
+                    maxlength: 10,
+                    digits: true
+                },
+                password: {
+                    required: true,
+                },
+                confirm_password: {
+                    required: true,
+                    equalTo: "#password"
+                },
+                image: {
+                    required: true
+                }
 
             },
             messages: {

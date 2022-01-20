@@ -42,9 +42,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- Media object ends -->
-
-                                            <!-- Account form starts -->
                                             <div class="row">
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
@@ -92,9 +89,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <!-- Information form ends -->
                             </div>
-                            <!-- Information content ends -->
                         </div>
                     </div>
                 </div>

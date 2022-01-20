@@ -77,7 +77,7 @@ class CommonSettingDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('subject_id')->title('Subject'),
             Column::make('marks'),
             Column::computed('action')

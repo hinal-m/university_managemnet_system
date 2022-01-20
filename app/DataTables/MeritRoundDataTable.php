@@ -81,7 +81,7 @@ class MeritRoundDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('round_no'),
             Column::make('course_id'),
             Column::make('start_date'),

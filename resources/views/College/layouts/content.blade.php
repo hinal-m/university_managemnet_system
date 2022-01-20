@@ -6,66 +6,26 @@
     <div class="content-wrapper">
         <!--Statistics cards Starts-->
         <div class="row">
-            <div class="col-xl-3 col-lg-6 col-md-6 col-12">
-                <div class="card gradient-purple-love">
-                    <div class="card-content">
-                        <div class="card-body py-0">
-                            <div class="media pb-1">
-                                <div class="media-body white text-left">
-                                    <h3 class="font-large-1 white mb-0"></h3>
-                                    <span>Total Stores</span>
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">{{ $meritAdmission }}</h3>
                                 </div>
-                                <div class="media-right white text-right">
-                                    <i class="fa fa-shopping-basket font-large-1"></i>
+                            </div>
+                            <div class="col-3">
+                                <div class="icon icon-box-success ">
+                                    <span class="mdi mdi-arrow-top-right icon-item"></span>
                                 </div>
                             </div>
                         </div>
-                        <div id="" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
-                        </div>
-                    </div>
-                </div>
-            </div>&nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="col-xl-3 col-lg-6 col-md-6 col-12">
-                <div class="card gradient-ibiza-sunset">
-                    <div class="card-content">
-                        <div class="card-body py-0">
-                            <div class="media pb-1">
-                                <div class="media-body white text-left">
-                                    <h3 class="font-large-1 white mb-0"></h3>
-                                    <span>Total Selected Brand</span>
-                                </div>
-                                <div class="media-right white text-right">
-                                    <i class="fa fa-superpowers font-large-1"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="" class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
-                        </div>
-
-                    </div>
-                </div>
-            </div>&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <div class="col-xl-3 col-lg-6 col-md-6 col-12">
-                <div class="card gradient-mint">
-                    <div class="card-content">
-                        <div class="card-body py-0">
-                            <div class="media pb-1">
-                                <div class="media-body white text-left">
-                                    <h3 class="font-large-1 white mb-0"></h3>
-                                    <span>Total Category</span>
-                                </div>
-                                <div class="media-right white text-right">
-                                    <i class="ft-list font-large-1"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div id=""
-                            class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
-                        </div>
+                        <h6 class="text-muted font-weight-normal">Total Admission</h6>
                     </div>
                 </div>
             </div>
+
         </div>
         <!--Statistics cards Ends-->
 

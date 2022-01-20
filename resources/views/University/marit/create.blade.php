@@ -96,31 +96,27 @@
 
         $("#start_date").datepicker({
             minDate: 0,
-            dateFormat: "yy-mm-dd",
-
-            onSelect: function(selected) {
-                $("#end_date").datepicker("option", "minDate", selected)
-            }
+            onSelect: function (selected) {
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate() + 1);
+            $("#end_date").datepicker("option", "minDate", dt);
+        }
         });
-
         $("#end_date").datepicker({
-            dateFormat: "yy-mm-dd",
-            onSelect: function(selected) {
-                $("#start_date").datepicker("option", "maxDate", selected)
-                maxDate + 1;
+            onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() - 1);
+                $("#start_date").datepicker("option", "maxDate", dt);
             }
         });
+        $('#marit_result').click(function(){
+            var a= $('#end_date').val();
+            onSelect: function (selected) {
+                $("#start_date").datepicker("option", "maxDate", a);
+            }
+        })
     });
-    $(function() {
-        $("#marit_result").datepicker({
-            minDate: 0,
-            dateFormat: "yy-mm-dd",
 
-            onSelect: function(selected) {
-                $("#marit_result").datepicker("option", "minDate", selected)
-            }
-        });
-    });
     $(document).ready(function() {
         $('#submit_form').validate({
             rules: {

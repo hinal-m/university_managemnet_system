@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\College;
+use App\Models\CollegeCourse;
 use App\Models\CollegeMerit;
 use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
@@ -25,11 +26,8 @@ class CollegeMeritDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn('college_id', function ($data) {
+                // dd($data->college);
                 return $data->college->name;
-
-            })
-            ->editColumn('course_id', function ($data) {
-                return $data->course->name;
 
             })
             ->addColumn('action', function ($data) {
@@ -82,7 +80,7 @@ class CollegeMeritDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('college_id')->title('College name')->name('college.name'),
             Column::make('course_id')->name('course.name'),
             Column::make('merit_round_id')->title('Merit Round No'),

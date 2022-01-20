@@ -77,7 +77,7 @@ class StudentMarkDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('user_id'),
             Column::make('subject_id'),
             Column::make('total_mark'),

@@ -1,21 +1,5 @@
 <!DOCTYPE html>
-<!--
-Template Name: Apex - Bootstrap 4 Admin Template
-Author: PixInvent
-Website: http://www.pixinvent.com/
-Contact: hello@pixinvent.com
-Follow: www.twitter.com/pixinvents
-Like: www.facebook.com/pixinvents
-Purchase: https://1.envato.market/apex_admin
-Renew Support: https://1.envato.market/apex_admin
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
-
--->
 <html class="loading" lang="en">
-<!-- BEGIN : Head-->
-
-<!-- Mirrored from pixinvent.com/apex-angular-4-bootstrap-admin-template/html-demo-1/auth-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Dec 2021 20:12:48 GMT -->
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,8 +18,6 @@ License: You must have a valid license purchased only from themeforest(the above
     <link
         href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900%7CMontserrat:300,400,500,600,700,800,900"
         rel="stylesheet">
-    <!-- BEGIN VENDOR CSS-->
-    <!-- font icons-->
     <link rel="stylesheet" type="text/css" href="{{ asset('saller-assets/app-assets/fonts/feather/style.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('saller-assets/app-assets/fonts/simple-line-icons/style.min.css') }}">
@@ -46,8 +28,6 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" type="text/css" href="{{ asset('saller-assets/app-assets/vendors/css/prism.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('saller-assets/app-assets/vendors/css/switchery.min.css') }}">
-    <!-- END VENDOR CSS-->
-    <!-- BEGIN APEX CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('saller-assets/app-assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('saller-assets/app-assets/css/bootstrap-extended.min.css') }}">
@@ -56,21 +36,30 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" type="text/css"
         href="{{ asset('saller-assets/app-assets/css/themes/layout-dark.min.css') }}">
     <link rel="stylesheet" href="{{ asset('saller-assets/app-assets/css/plugins/switchery.min.css') }}">
-    <!-- END APEX CSS-->
-    <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" href="{{ asset('saller-assets/app-assets/css/pages/authentication.css') }}">
-    <!-- END Page Level CSS-->
-    <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('saller-assets/assets/css/style.css') }}">
-    <!-- END: Custom CSS-->
-</head>
-<!-- END : Head-->
+    <style>
 
-<!-- BEGIN : Body-->
+        .error {
+            color: red;
+        }
+
+        .errorMsg {
+            border: 1px solid red;
+        }
+
+        .is-invalid {
+            border: red 3px solid !important;
+        }
+
+        .validation {
+            color: red;
+        }
+    </style>
+</head>
 
 <body class="vertical-layout vertical-menu 1-column auth-page navbar-sticky blank-page" data-menu="vertical-menu"
     data-col="1-column">
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
     <div class="wrapper">
         <div class="main-panel">
             <!-- BEGIN : Main Content-->
@@ -92,7 +81,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 px-4 py-3">
                                                     <form action="{{ route('college.college.create') }}"
-                                                        method="post" enctype="multipart/form-data">
+                                                        method="post" id="register" enctype="multipart/form-data">
                                                         @csrf
                                                         @if (Session::get('success'))
                                                             <div class="alert alert-success">
@@ -146,7 +135,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                         </span>
                                                         @enderror
                                                         <input type="password" name="password" class="form-control mb-2"
-                                                        value="{{old('password')}}" placeholder="Password">
+                                                        value="{{old('password')}}" id="password" placeholder="Password">
                                                             @error('password')
                                                             <span class="text-danger" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -164,8 +153,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                                         <div class="checkbox auth-checkbox font-small-2 mb-3">
 
-                                                            <label for="auth-ligin"><span>I accept the terms &
-                                                                    conditions</span></label>
+
                                                         </div>
                                                         <div
                                                             class="d-flex justify-content-between flex-sm-row flex-column">
@@ -184,36 +172,93 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                         </div>
                     </section>
-                    <!--Registration Page Ends-->
-
                 </div>
             </div>
-            <!-- END : End Main Content-->
         </div>
     </div>
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-
-    <!-- BEGIN VENDOR JS-->
     <script src="{{ asset('saller-assets/app-assets/vendors/js/vendors.min.js') }}"></script>
     <script src="{{ asset('saller-assets/app-assets/vendors/js/switchery.min.js') }}"></script>
-    <!-- BEGIN VENDOR JS-->
-    <!-- BEGIN PAGE VENDOR JS-->
-    <!-- END PAGE VENDOR JS-->
-    <!-- BEGIN APEX JS-->
     <script src="{{ asset('saller-assets/app-assets/js/core/app-menu.min.js') }}"></script>
     <script src="{{ asset('saller-assets/app-assets/js/core/app.min.js') }}"></script>
     <script src="{{ asset('saller-assets/app-assets/js/notification-sidebar.min.js') }}"></script>
     <script src="{{ asset('saller-assets/app-assets/js/customizer.min.js') }}"></script>
     <script src="{{ asset('saller-assets/app-assets/js/scroll-top.min.js') }}"></script>
-    <!-- END APEX JS-->
-    <!-- BEGIN PAGE LEVEL JS-->
-    <!-- END PAGE LEVEL JS-->
-    <!-- BEGIN: Custom CSS-->
     <script src="{{ asset('saller-assets/assets/js/scripts.js') }}"></script>
-    <!-- END: Custom CSS-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#register').validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true
+
+                    },
+                    address: {
+                        required: true,
+
+                    },
+                    contact: {
+                        required: true,
+                        required: true,
+                        maxlength: 10,
+                        digits: true
+
+                    },
+                    logo: {
+                        required: true,
+
+                    },
+                    password: {
+                        required: true,
+                    },
+                    cpassword: {
+                        required: true,
+                        equalTo: "#password"
+                    },
+
+                },
+                messages: {
+                    'name': {
+                        'required': 'Please Enter  Name'
+                    },
+                    'email': {
+                        'required': 'Please Enter Email'
+                    },
+                    'contact': {
+                        'required': 'Please Enter contact No'
+                    },
+                    'address': {
+                        'required': 'Please Enter address'
+                    },
+                    'password': {
+                        'required': 'Please Enter Password'
+                    },
+                    'cpassword': {
+                        'required': 'Please Confirm Password'
+                    },
+                    'logo': {
+                        'required': 'Please select logo'
+                    }
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid");
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                },
+                submitHandler: function(form) {
+                    register(form);
+                }
+
+            });
+        });
+    </script>
 </body>
-<!-- END : Body-->
-
-<!-- Mirrored from pixinvent.com/apex-angular-4-bootstrap-admin-template/html-demo-1/auth-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Dec 2021 20:12:48 GMT -->
-
 </html>

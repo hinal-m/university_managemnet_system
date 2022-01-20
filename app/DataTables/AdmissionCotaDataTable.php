@@ -26,17 +26,15 @@ class AdmissionCotaDataTable extends DataTable
         return datatables()
             ->eloquent($query)
 
-            ->editColumn('course_id', function ($data) {
-                return $data->Course->name ?? '-';
-            })
-            ->editColumn('user_id', function ($data) {
-                return $data->user->name ?? '-';
-            })
             ->editColumn('college_id', function ($data) {
-                $college = College::whereIn('id',$data->college_id)->pluck('name')->toArray();
-                return implode('<br>',$college);
+                $college = College::whereIn('id', $data->college_id)->pluck('name')->toArray();
+                return implode('<br>', $college);
             })
-            ->rawColumns(['course_id','college_id'])
+            ->addColumn('Confirm', function ($data) {
+                // dd($data);
+                return '<button type="submit" data-id="' . $data->id . '" style="color:white" width="70px" class="btn btn-primary confirm">Confirmed</button>';
+            })
+            ->rawColumns(['college_id','Confirm'])
             ->addIndexColumn();
     }
 
@@ -48,20 +46,19 @@ class AdmissionCotaDataTable extends DataTable
      */
     public function query(Addmission $model)
     {
+        $college_merit = CollegeMerit::where('college_id', Auth::guard('college')->user()->id)->first();
+        $college_id = Auth::guard('college')->user()->id;
+        if ($college_merit) {
+            return
+                $model->where('merit', '<=', $college_merit->merit)
+                ->where('college_id', 'like', '%"' . $college_id . '"%')
+                ->where('status','!=','1')
+                ->newQuery();
+        } else {
+            return $model->where('id', -1)->newQuery();
+        }
 
-        // $user = Auth::user()->id;
-        // $college_merit = CollegeMerit::where('college_id', Auth::user()->id)->first();
-        // if ($college_merit) {
-        //     return
-        //         $model->where('merit', '>=', $college_merit->merit)
-        //         ->where('college_id', 'like', '%"' . $user . '"%')
-        //         ->newQuery();
-        // }
-
-            $college_id = Auth::guard('college')->user()->id;
-            $model = $model::where('college_id', 'like', '%"' . $college_id . '"%');
-
-        return $model->with('course')->with('meritRound')->with('user')->newQuery();
+        return $model->with('meritRound')->newQuery();
     }
 
     /**
@@ -78,11 +75,10 @@ class AdmissionCotaDataTable extends DataTable
             ->dom('Bfrtip')
             ->orderBy(1)
             ->buttons(
-                Button::make('create'),
-                Button::make('export'),
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
                 Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
             );
     }
 
@@ -94,7 +90,7 @@ class AdmissionCotaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('college_id'),
             Column::make('course_id')->name('course.name'),
             Column::make('user_id')->name('user.name'),
@@ -102,6 +98,7 @@ class AdmissionCotaDataTable extends DataTable
             Column::make('addmission_date'),
             Column::make('addmission_code'),
             Column::make('merit_round_id')->name('meritRound.round_no'),
+            Column::make('Confirm'),
         ];
     }
 

@@ -79,7 +79,7 @@ class CollegeCourseDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('course_id')->name('Course.name')->title('Course Name'),
             Column::make('reserved_seat'),
             Column::make('merit_seat'),

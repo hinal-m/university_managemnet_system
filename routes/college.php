@@ -57,7 +57,12 @@ Route::group(['middleware' => 'auth:college'], function () {
 
     //admission
     Route::get('admission',[DashboardController::class,'index'])->name('index');
+    Route::get('meritexport',[DashboardController::class,'meritexport'])->name('meritexport');
+    Route::get('reservePdf',[DashboardController::class,'reservePdf'])->name('reservePdf');
+
     Route::get('list',[DashboardController::class,'cotaAdmission'])->name('list');
+    Route::post('confirm',[DashboardController::class,'reservedConfirm'])->name('confirm');
+
 
 
 

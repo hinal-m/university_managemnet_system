@@ -52,7 +52,7 @@ class SubjectDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
+            Column::make('id')->data('DT_RowIndex'),
             Column::make('name'),
             Column::make('code'),
             Column::make('status'),
