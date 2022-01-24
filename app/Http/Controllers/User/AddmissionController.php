@@ -26,7 +26,7 @@ class AddmissionController extends Controller
         $toDate = Carbon::now()->format('Y-m-d');
         $round= MeritRound::where('status','1')->where('end_date','>=',$toDate)->get()->toArray();
         $addmission = $this->addmission->create();
-        return view('user.addmission.create',compact(['addmission','round','toDate','subjects','student_mark']));
+        return view('User.addmission.create',compact(['addmission','round','toDate','subjects','student_mark']));
     }
 
 
@@ -36,5 +36,5 @@ class AddmissionController extends Controller
         return response()->json(['data'=> $addmission]);
     }
 
-   
+
 }
