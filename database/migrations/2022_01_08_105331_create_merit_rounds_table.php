@@ -15,9 +15,14 @@ class CreateMeritRoundsTable extends Migration
     {
         Schema::create('merit_rounds', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
+            $table->string('round_no')->nullable();
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
             $table->string('merit_result_declare_date')->nullable();
+            $table->boolean('status')->default(1)->comment('0 = inactive, 1 = active');
             $table->softDeletes();
             $table->timestamps();
         });

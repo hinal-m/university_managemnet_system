@@ -19,7 +19,6 @@ class CreateStudentMarksTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects');
-
             $table->string('total_mark')->nullable();
             $table->string('obtain_mark')->nullable();
             $table->softDeletes();

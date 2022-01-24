@@ -21,7 +21,7 @@ class CreateCollegesTable extends Migration
             $table->string('address')->nullable();
             $table->string('password')->nullable();
             $table->string('logo')->nullable();
-            $table->boolean('status')->comment('false = inactive, true = active');
+            $table->boolean('status')->comment('0 = inactive, 1 = active');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -17,11 +17,17 @@ class CreateAddmissionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('merit')->nullable();
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
+
+            $table->unsignedBigInteger('merit_round_id');
+            $table->foreign('merit_round_id')->references('id')->on('merit_rounds');
             $table->string('college_id')->nullable();
-            $table->string('sequence')->nullable();
             $table->string('addmission_date')->nullable();
             $table->string('addmission_code')->nullable();
-            $table->boolean('status')->comment('false = inactive, true = active');
+            $table->boolean('status')->comment('0 = next, 1 = confirm, 2 = reject, 3 = pending');
+
             $table->softDeletes();
             $table->timestamps();
         });

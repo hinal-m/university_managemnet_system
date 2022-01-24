@@ -17,7 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('code')->nullable();
-            $table->boolean('status')->comment('false = inactive, true = active');
+            $table->boolean('status')->comment('0 = inactive, 1 = active');
             $table->softDeletes();
             $table->timestamps();
         });

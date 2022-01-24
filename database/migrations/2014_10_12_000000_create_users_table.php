@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('contact_no')->nullable();
             $table->enum('gender', ['F', 'M', 'O'])->nullable()->default('M')->comment('F = Female , M = Male, O = Others');
             $table->string('address')->nullable();
+            $table->string('dob')->nullable();
             $table->string('otp')->nullable();
             $table->string('password')->nullable();
             $table->string('adhaar_card_no')->nullable();
