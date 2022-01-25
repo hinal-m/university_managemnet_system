@@ -20,7 +20,7 @@ class CollegeController extends Controller
 
     public function index(CollegeDataTable $dataTable)
     {
-        return $dataTable->render('university.college.index');
+        return $dataTable->render('University.College.index');
     }
 
     /**
@@ -65,7 +65,7 @@ class CollegeController extends Controller
     public function edit($id)
     {
         $college = College::find($id);
-        return view('university.college.edit', compact('college'));
+        return view('University.College.edit', compact('college'));
     }
 
     /**
