@@ -67,7 +67,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items {{ request()->is('*college*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('university.college.index')}}">
+                <a class="nav-link" href="{{route('university.list')}}">
                     <span class="menu-icon">
                         <i class="mdi mdi-speedometer"></i>
                     </span>
