@@ -20,14 +20,14 @@ class MaritRoundController extends Controller
     }
     public function index(MeritRoundDataTable $dataTable)
     {
-        return $dataTable->render('university.marit.index');
+        return $dataTable->render('University.marit.index');
     }
 
 
     public function create()
     {
         $course = $this->marit_round->create();
-        return view('university.marit.create',compact('course'));
+        return view('University.marit.create',compact('course'));
 
     }
 
@@ -49,7 +49,7 @@ class MaritRoundController extends Controller
     {
         $marit_round = MeritRound::find($id);
         $course = Course::get();
-        return view('university.marit.edit', compact('marit_round','course'));
+        return view('University.marit.edit', compact('marit_round','course'));
     }
 
 

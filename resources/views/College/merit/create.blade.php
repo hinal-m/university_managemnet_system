@@ -6,7 +6,6 @@
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12">
-                <div class="content-header">Inputs</div>
             </div>
         </div>
         <!-- Basic Inputs start -->
@@ -16,7 +15,7 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">College Course Add</h4>
+                            <h4 class="card-title">College Merit Add</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
@@ -69,7 +68,6 @@
         <script>
             $(document).on('change', '.course', function() {
                 var id = $(this).val();
-                alert(id);
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
@@ -83,7 +81,7 @@
                     success: function(data) {
                         console.log(data);
                         var htm='';
-                        htm+='<option >Select Round</option>';
+                        htm+='<option value="">Select Round</option>';
                         $.each(data.data,function(key,val){
                             htm+='<option value='+val['round_no']+'>Round No: '+val['round_no']+'</option>'
                         })
