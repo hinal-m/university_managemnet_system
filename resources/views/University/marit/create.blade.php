@@ -109,12 +109,12 @@
                 $("#start_date").datepicker("option", "maxDate", dt);
             }
         });
-        $('#marit_result').click(function(){
-            var a= $('#end_date').val();
-            onSelect: function (selected) {
-                $("#start_date").datepicker("option", "maxDate", a);
-            }
-        })
+        // $('#marit_result').click(function(){
+        //     var a= $('#end_date').val();
+        //     onSelect: function (selected) {
+        //         $("#start_date").datepicker("option", "maxDate", a);
+        //     }
+        // })
     });
 
     $(document).ready(function() {
