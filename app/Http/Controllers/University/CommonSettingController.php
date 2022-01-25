@@ -18,7 +18,7 @@ class CommonSettingController extends Controller
     }
     public function index(CommonSettingDataTable $dataTable)
     {
-        return $dataTable->render('university.CommonSetting.index');
+        return $dataTable->render('University.CommonSetting.index');
     }
 
     public function create()
@@ -37,7 +37,7 @@ class CommonSettingController extends Controller
     {
         $common = CommonSetting::find($id);
         $subject = Subject::get();
-        return view('university.CommonSetting.edit', compact('common','subject'));
+        return view('University.CommonSetting.edit', compact('common','subject'));
     }
 
     public function update(Request $request)
