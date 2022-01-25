@@ -83,7 +83,6 @@ class AddmissionRepository implements AddmissionInterface
             'addmission_code'=>Str::upper($course_name).date('ymd').Auth::guard('user')->user()->id,
             'status' => '3'
         ]);
-        dd($addmission);
 
         return $addmission;
     }
