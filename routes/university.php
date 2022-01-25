@@ -33,7 +33,7 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('check', [LoginController::class, 'check'])->name('university.check');
 });
 
-// Route::group(['middleware' => 'auth:university'], function () {
+Route::group(['middleware' => 'auth:university'], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'logout'])->name('university.logout');
@@ -78,4 +78,4 @@ Route::group(['namespace' => 'Auth'], function () {
 
 
 
-// });
+});

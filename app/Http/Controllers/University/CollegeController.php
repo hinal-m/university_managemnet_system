@@ -30,7 +30,7 @@ class CollegeController extends Controller
      */
     public function create()
     {
-        return view('university.college.create');
+        return view('University.College.create');
     }
 
     /**
