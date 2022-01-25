@@ -68,7 +68,7 @@ class AddmissionRepository implements AddmissionInterface
         $course_name = Course::where('id', $data['course_id'])->pluck('name')->first();
         $toDate = Carbon::now()->format('Y-m-d');
 
-        $round = MeritRound::where('course_id',$data['course_id'])->where('status','1')->where('merit_result_declare_date', '=', $toDate)->latest()->pluck('round_no')->first();
+        // $round = MeritRound::where('course_id',$data['course_id'])->where('status','1')->where('merit_result_declare_date', '=', $toDate)->latest()->pluck('round_no')->first();
         // dd($round);
 
         $addmission = Addmission::updateOrCreate([
@@ -78,7 +78,7 @@ class AddmissionRepository implements AddmissionInterface
             'user_id' => Auth::guard('user')->user()->id,
             'merit' => round($merit,2),
             'course_id'=> $data['course_id'],
-            'merit_round_id'=>$round,
+            'merit_round_id'=>'1',
             'addmission_date'=>date('y/m/d'),
             'addmission_code'=>Str::upper($course_name).date('ymd').Auth::guard('user')->user()->id,
             'status' => '3'
