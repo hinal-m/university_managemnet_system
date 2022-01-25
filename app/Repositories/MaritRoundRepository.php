@@ -24,7 +24,7 @@ class MaritRoundRepository implements MaritRoundInterface
 
     public function store(array $data)
     {
-        // dd($data);
+        dd($data);
         $marit_round = new MeritRound;
         $marit_round->round_no = $data['round_no'];
         $marit_round->course_id = $data['course_id'];
