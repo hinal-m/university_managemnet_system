@@ -45,18 +45,18 @@ Route::group(['middleware' => 'auth:university'], function () {
 
     //COLLEG
     Route::resource('college',          'CollegeController')->except('destroy');
-    Route::post('delete',               [CollegeController::class, 'destroy'])->name('delete');
-    Route::get('status',          [CollegeController::class, 'status'])->name('status');
+    Route::post('delete',           [CollegeController::class, 'destroy'])->name('delete');
+    Route::get('status',            [CollegeController::class, 'status'])->name('status');
 
     //Common Setting
-    Route::get('/index', [CommonSettingController::class, 'index'])->name('index');
-    Route::get('/create', [CommonSettingController::class, 'create'])->name('create');
-    Route::post('/store', [CommonSettingController::class, 'store'])->name('store');
+    Route::get('/index',     [CommonSettingController::class, 'index'])->name('index');
+    Route::get('/create',    [CommonSettingController::class, 'create'])->name('create');
+    Route::post('/store',    [CommonSettingController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [CommonSettingController::class, 'edit'])->name('edit');
-    Route::post('update', [CommonSettingController::class, 'update'])->name('update');
+    Route::post('update',    [CommonSettingController::class, 'update'])->name('update');
 
     //Sudent
-    Route::get('/list', [StudentController::class, 'index'])->name('list');
+    Route::get('/list',   [StudentController::class, 'index'])->name('list');
     Route::post('delete', [StudentController::class, 'delete'])->name('delete');
 
     //Course
@@ -64,15 +64,15 @@ Route::group(['middleware' => 'auth:university'], function () {
     Route::get('course-status',[CourseController::class, 'status'])->name('course_status');
 
     //marit round
-    Route::resource('marit','MaritRoundController');
+    Route::resource('marit',    'MaritRoundController');
     Route::post('merit-delete', [MaritRoundController::class, 'destroy'])->name('merit_delete');
-    Route::get('merit-status',[MaritRoundController::class, 'status'])->name('merit_status');
+    Route::get('merit-status',  [MaritRoundController::class, 'status'])->name('merit_status');
 
     //admission
-    Route::get('admission',[AddmissionController::class,'index'])->name('admission_list');
+    Route::get('admission', [AddmissionController::class,'index'])->name('admission_list');
 
     //subject
-    Route::get('subject',[SubjectController::class,'index'])->name('subject_list');
+    Route::get('subject',   [SubjectController::class,'index'])->name('subject_list');
 
 
 
