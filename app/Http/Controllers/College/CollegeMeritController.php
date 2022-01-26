@@ -64,9 +64,7 @@ class CollegeMeritController extends Controller
 
     public function getRound(Request $request)
     {
-        // dd($request['id']);
         $data = MeritRound::select('round_no')->where('course_id',$request['id'])->get();
-        // dd($data);
         return response()->json([
             'data' => $data
         ]);

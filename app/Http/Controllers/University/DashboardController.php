@@ -21,7 +21,6 @@ class DashboardController extends Controller
     public function index()
     {
         $college = College::all()->count();
-        // dd($college);
         $student = User::all()->count();
         $admission = Addmission::all()->count();
         return view('University.layouts.content',compact(['college','student','admission']));

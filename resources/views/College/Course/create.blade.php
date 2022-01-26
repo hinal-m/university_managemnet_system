@@ -1,6 +1,5 @@
 @extends('College.layouts.master')
 @section('title', 'Courses')
-
 @section('content')
 
     <div class="content-overlay"></div>

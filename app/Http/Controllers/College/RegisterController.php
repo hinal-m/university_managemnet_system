@@ -12,13 +12,11 @@ class RegisterController extends Controller
 {
     public function registerFormShow()
     {
-        // dd(1);
         return view('College.Auth.register');
     }
 
     public function register(StoreRequest $request)
     {
-        // dd(1);
         $collge = new College();
         $collge->name = $request->name;
         $collge->email = $request->email;

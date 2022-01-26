@@ -89,9 +89,7 @@ class DashboardController extends Controller
 
     public function index(CollegeAdmissionDataTable $dataTable)
     {
-        //   dd(1);
         $addmission = AddmissionConfirmation::all();
-        // dd($addmission);
         return $dataTable->render('College.admission.index');
     }
 
@@ -111,10 +109,7 @@ class DashboardController extends Controller
         } else {
             $reserveAdmission = Addmission::where('id', -1)->newQuery();
         }
-        // dd($reserveAdmission);
-        // dd($meritAdmission);
         // $addmission = Addmission::where('id',$meritAdmission->addmission_id)->pluck('addmission_code')->first();
-        // dd($meritAdmission);
         $pdf = PDf::loadview('College.admission.reservePdf', compact('reserveAdmission'));
         return $pdf->stream('document.pdf');
     }
@@ -127,9 +122,7 @@ class DashboardController extends Controller
 
     public function reservedConfirm(Request $request)
     {
-        //   dd($request->all());
         $userInfo = Addmission::where('id', $request->id)->first();
-        // dd($userInfo);
 
 
         $admission_confirm = AddmissionConfirmation::create([

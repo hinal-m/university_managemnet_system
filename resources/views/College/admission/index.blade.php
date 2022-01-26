@@ -1,6 +1,5 @@
 @extends('College.layouts.master')
 @section('title', 'Admission')
-
 @section('content')
 <div class="content-overlay"></div>
 <div class="content-wrapper">
@@ -16,7 +15,6 @@
         </div>
      </div>
    </div>
-   <!-- Zero configuration table -->
    <section id="configuration">
       <div class="row">
          <div class="col-12 gradient-man-of-steel d-block rounded">
@@ -34,7 +32,6 @@
          </div>
       </div>
    </section>
-   <!--/ Zero configuration table -->
 </div>
 @endsection
 @push('js')
@@ -48,5 +45,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
-
-    @endpush
+@endpush

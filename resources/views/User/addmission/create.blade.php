@@ -6,10 +6,8 @@
     <div class="content-wrapper">
         <div class="row">
         </div>
-        <!-- Basic Inputs start -->
         <section id="basic-hidden-label-form-layouts">
             <div class="row match-height">
-                <!-- Basic Form starts -->
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
@@ -74,19 +72,14 @@
                         </div>
                     </div>
                 </div>
-                <!-- Hidden Label ends -->
             </div>
         </section>
-        <!-- Basic Inputs end -->
     @endsection
     @push('js')
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-        {{-- <script type="text/javascript">
-            $(".js-example-basic-multiple").select2();
-        </script> --}}
         <script>
             $('.js-example-basic-multiple').select2({
                 tags: true
@@ -173,14 +166,6 @@
                                         "{{ route('user.addmission.create') }}";
                                 }
                             },
-                            // error: function(data) {
-                            //     $.each(data.responseJSON.errors, function(
-                            //         key, value) {
-                            //         $('[name=' + key + ']').after(
-                            //             '<span class="text-strong" style="color:red">' +
-                            //             value + '</span>')
-                            //     });
-                            // }
                         });
                     } else {
                         swal("Cancelled", "Your record is safe :)", "error");

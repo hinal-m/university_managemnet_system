@@ -19,6 +19,7 @@ class AddmissionController extends Controller
     {
         $this->addmission = $addmission;
     }
+    
     public function create()
     {
         $subjects = Subject::with('userStudentMark:id,subject_id,obtain_mark')->get();
@@ -28,7 +29,6 @@ class AddmissionController extends Controller
         $addmission = $this->addmission->create();
         return view('User.addmission.create',compact(['addmission','round','toDate','subjects','student_mark']));
     }
-
 
     public function store(AdmissionRequest $request)
     {

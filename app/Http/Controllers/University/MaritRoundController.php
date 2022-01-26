@@ -69,7 +69,6 @@ class MaritRoundController extends Controller
     public function status(Request $request)
     {
         $id = $request['id'];
-        // dd($id);
         $marit_round = MeritRound::find($id);
 
         if ($marit_round->status == "1") {

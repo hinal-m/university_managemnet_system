@@ -14,7 +14,6 @@ class LoginController extends Controller
 
     public function check(Request $request)
     {
-        // dd(1);
         $request->validate([
             'email' => 'required|email|exists:colleges,email',
             'password' => 'required|min:3|max:30'

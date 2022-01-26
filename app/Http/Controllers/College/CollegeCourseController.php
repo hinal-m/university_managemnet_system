@@ -22,11 +22,6 @@ class CollegeCourseController extends Controller
         return $dataTable->render('College.Course.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $college_course = $this->college_course->create();
@@ -48,9 +43,7 @@ class CollegeCourseController extends Controller
 
     public function edit($id)
     {
-        // dd($id);
         $college_course = CollegeCourse::find($id);
-        // dd($college_course);
         $course = Course::get();
         return view('College.Course.edit', compact('college_course','course'));
     }

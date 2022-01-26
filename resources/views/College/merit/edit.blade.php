@@ -9,10 +9,8 @@
                 <div class="content-header">Inputs</div>
             </div>
         </div>
-        <!-- Basic Inputs start -->
         <section id="basic-hidden-label-form-layouts">
             <div class="row match-height">
-                <!-- Basic Form starts -->
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
@@ -58,10 +56,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- Hidden Label ends -->
             </div>
         </section>
-        <!-- Basic Inputs end -->
     @endsection
     @push('js')
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -130,7 +126,6 @@
 
                 });
             });
-
 
             function register(form) {
                 $('.text-strong').html('');

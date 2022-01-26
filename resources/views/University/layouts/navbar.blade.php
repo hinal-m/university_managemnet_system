@@ -175,7 +175,7 @@
                                 <i class="mdi mdi-account text-success"></i>
                             </div>
                         </div>
-                        <div class="preview-item-content" >
+                        <div class="preview-item-content" href="{{route('university.changePasswordGet')}}" >
                             <p class="preview-subject mb-1" >Change Password</p>
                         </div>
                     </a>

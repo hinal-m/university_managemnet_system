@@ -100,9 +100,10 @@
     <script>
         $(document).ready(function() {
 
+
             $("#start_date").datepicker({
-                dateFormat: 'yy-mm-dd',
                 minDate: 0,
+                dateFormat: 'yy-mm-dd',
                 onSelect: function(selected) {
                     var dt = new Date(selected);
                     dt.setDate(dt.getDate() + 1);
@@ -113,19 +114,13 @@
                 dateFormat: 'yy-mm-dd',
                 onSelect: function(selected) {
                     var dt = new Date(selected);
-                    dt.setDate(dt.getDate() - 1);
-                    $("#start_date").datepicker("option", "maxDate", dt);
+                    dt.setDate(dt.getDate() + 1);
+                    $("#marit_result").datepicker("option", "minDate", dt);
                 }
             });
-            // var mdt = '';
             $('#marit_result').datepicker({
-                dateFormat: 'yy-mm-dd',
-                onSelect: function(selected) {
-                    var mdt = new Date(selected);
-                    mdt.setDate(mdt.getDate() - 1);
-                    $("#end_date").datepicker("option", "maxDate", mdt);
-                },
-            })
+                dateFormat: "yy-mm-dd",
+            });
         });
 
         $(document).ready(function() {
@@ -164,7 +159,7 @@
                         'required': 'Please Select end Date'
                     },
                     'marit_result': {
-                        'required': 'Please Select date'
+                        'required': 'Please Select Merit Result date'
                     },
                 },
                 highlight: function(element, errorClass, validClass) {
@@ -211,14 +206,6 @@
                                     "{{ route('university.marit.index') }}";
                             }
                         },
-                        // error: function(data) {
-                        //     $.each(data.responseJSON.errors, function(
-                        //         key, value) {
-                        //         $('[name=' + key + ']').after(
-                        //             '<span class="text-strong" style="color:red">' +
-                        //             value + '</span>')
-                        //     });
-                        // }
                     });
                 } else {
                     swal("Cancelled", "Your record is safe :)", "error");

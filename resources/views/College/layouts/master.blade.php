@@ -80,40 +80,16 @@
 <body class="vertical-layout vertical-menu 2-columns  navbar-sticky" data-menu="vertical-menu" data-col="2-columns">
 
     @include('College.layouts.navbar')
-    <!-- Navbar (Header) Ends-->
-
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
     <div class="wrapper">
-
-
-        <!-- main menu-->
-        <!--.main-menu(class="#{menuColor} #{menuOpenType}", class=(menuShadow == true ? 'menu-shadow' : ''))-->
-        {{-- sidebar start --}}
         @include('College.layouts.sidebar')
-        {{-- sidebar end --}}
 
         <div class="main-panel">
-            <!-- BEGIN : Main Content-->
             <div class="main-content">
-
                 @yield('content')
             </div>
-             <!-- END : End Main Content-->
-
-            <!-- BEGIN : Footer-->
-            <!-- End : Footer-->
-            <!-- Scroll to top button -->
-            <!-- <button class="btn btn-primary scroll-top" type="button"><i class="ft-arrow-up"></i></button> -->
         </div>
         @include('College.layouts.footer')
     </div>
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-
-    <!-- START Notification Sidebar-->
-    {{-- @include('College.layouts.sidenotification') --}}
-
-
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
 
     <script src="{{ asset('saller-assets/app-assets/vendors/js/vendors.min.js') }}"></script>
     <!-- ---------------------------------------------datatable------------------------------ -->
@@ -124,16 +100,6 @@
     <script src="{{ asset('saller-assets/app-assets/js/notification-sidebar.min.js') }}"></script>
     <script src="{{ asset('saller-assets/app-assets/js/customizer.min.js') }}"></script>
     <script src="{{ asset('saller-assets/app-assets/js/scroll-top.min.js') }}"></script>
-    <!-- <script src="{{ asset('saller-assets/app-assets/js/scripts.js') }}"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script> -->
-
-    <!-- ---------------------------------------------datatable------------------------------ -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
-    </script>  -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous">
-    </script>  -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous">
-    </script>  -->
     <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap4.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>

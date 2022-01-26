@@ -6,10 +6,9 @@
 
         @if ($declare_date)
             @if (isset($collegemerit) && !empty($collegemerit))
-                @if($admission->status == 3)
-                <button type="submit"
-                            data-id="{{ $collegemerit->id ?? '' }}" class="btn gradient-pomegranate big-shadow confirm"
-                            name="confirm">Confirmed</button>
+                @if ($admission->status == 3)
+                    <button type="submit" data-id="{{ $collegemerit->id ?? '' }}"
+                        class="btn gradient-pomegranate big-shadow confirm" name="confirm">Confirmed</button>
                 @endif
 
                 {{-- <a href="{{ route('user.addmission.create') }}" type="submit" data-id="4" class="btn gradient-mint shadow-z-4 confirm "
@@ -61,7 +60,7 @@
                         if (data) {
                             swal(
                                 "success");
-                                $('.confirm').disable();
+                            $('.confirm').disable();
                             window.location.href =
                                 "{{ route('user.dashboard') }}";
                         }

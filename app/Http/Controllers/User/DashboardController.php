@@ -35,13 +35,11 @@ class DashboardController extends Controller
         $admission_college = Addmission::where('user_id', Auth::guard('user')->user()->id)->pluck('college_id')->toArray();
         $collegemerit = [];
         $message = '';
-        // dd($admission_college);
         if (!empty($admission_college)) {
 
             $first =  reset($admission_college[0]);
 
             $collegeInfo = CollegeMerit::whereIn('college_id', $admission_college[0])->where('merit', '<=', $admission->merit)->get();
-            // dd($collegeInfo);
 
             if (count($collegeInfo) == 0) {
 
@@ -50,7 +48,6 @@ class DashboardController extends Controller
             } else {
                 $collegemerit = college::where('id', $collegeInfo[0]->college_id)->first();
             }
-            // dd($collegemerit);
 
             return view('User.layouts.content', compact('declare_date', 'collegemerit', 'message','admission'));
         }
@@ -61,17 +58,10 @@ class DashboardController extends Controller
     //Confirm Admission
     public function confirm(Request $request)
     {
-        // dd($request->id);
         $userInfo = Addmission::where('user_id', Auth::user()->id)->first();
-        // dd($userInfo->course_id);
-        // if($request->id == '2'){
-        //     $userInfo->status = '2';
-        // }
         $userInfo->save();
         $collegeCourse = CollegeCourse::where('college_id', $request->id)->where('course_id', $userInfo->course_id)->select('merit_seat')->first();
-        // dd($collegeCourse);
         $addmissionConfirmation = AddmissionConfirmation::where('confirm_college_id', $request->college_id)->where('confirm_round_id', $request->merit_round_id)->where('confirmation_type', 'M')->get();
-        // dd($addmissionConfirmation);
         if ($collegeCourse->merit_seat >= count($addmissionConfirmation)) {
 
             $user_id = User::where('id', $userInfo->user_id)->first();
