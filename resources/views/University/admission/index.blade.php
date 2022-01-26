@@ -34,8 +34,8 @@
     {!! $dataTable->scripts() !!}
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-        <script>
-            $(document).on('click', '.delete', function() {
+    <script>
+        $(document).on('click', '.delete', function() {
             var id = $(this).data('id');
             var el = this;
             swal({
@@ -75,38 +75,6 @@
                 });
         });
 
-     //status
-     $(document).on('click', '.status', function() {
-        swal({
-                title: "Are you sure?",
-                text: "You Want To Change The Status!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    var id = $(this).data('id');
-                    var number = $(this).attr('id', 'asd');
-                    $.ajax({
-                        url: "{{ route('university.status') }}",
-                        type: 'get',
-                        data: {
-                            id: id,
-                        },
-                        dataType: "json",
-                        success: function(data) {
-                            $('#college-table').DataTable().ajax.reload();
-                        }
-                    })
-                    swal("Your Status Has Ben Change Succesfully", {
-                        icon: "success",
-                    });
-                } else {
-                    swal("Your Status is safe!");
-                }
-            });
-    });
     </script>
 
 @endpush

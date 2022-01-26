@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\Course;
 use App\Models\MaritRound;
 use App\Models\MeritRound;
 use Yajra\DataTables\Html\Button;
@@ -29,6 +30,10 @@ class MeritRoundDataTable extends DataTable
                     $result .= '<button type="submit" data-id="' . $data->id . '" class="btn btn-danger mr-sm-2 mb-1 delete">Delete</button>';
                     return $result;
             })
+            ->editColumn('course_id',function($data){
+                $course =  Course::where('id',$data->course_id)->pluck('name')->toArray();
+                return $course;
+            })
             ->editColumn('status', function ($data) {
                 if ($data->status == '0') {
                     return '<a data-id="' . $data->id . '"  style="color:white" class="badge badge-pill-lg badge-danger status">Inactive</a>';
@@ -36,7 +41,7 @@ class MeritRoundDataTable extends DataTable
                     return '<a data-id="' . $data->id . '"  style="color:white" width="70px" class="badge badge-pill-lg badge-success status">Active</a>';
                 }
         })
-            ->rawColumns(['action','status'])
+            ->rawColumns(['action','status','course_id'])
             ->addIndexColumn();
     }
 
@@ -83,7 +88,7 @@ class MeritRoundDataTable extends DataTable
         return [
             Column::make('id')->data('DT_RowIndex'),
             Column::make('round_no'),
-            Column::make('course_id'),
+            Column::make('course_id')->title('course'),
             Column::make('start_date'),
             Column::make('end_date'),
             Column::make('merit_result_declare_date')->title('Marit Declare Date'),

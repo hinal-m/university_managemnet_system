@@ -6,6 +6,8 @@ use App\Models\Addmission;
 use App\Models\AdmissionCotum;
 use App\Models\College;
 use App\Models\CollegeMerit;
+use App\Models\Course;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -30,11 +32,19 @@ class AdmissionCotaDataTable extends DataTable
                 $college = College::whereIn('id', $data->college_id)->pluck('name')->toArray();
                 return implode('<br>', $college);
             })
+            ->editColumn('course_id',function($data){
+                $course =  Course::where('id',$data->course_id)->pluck('name')->toArray();
+                return $course;
+            })
+            ->editColumn('user_id',function($data){
+                $course =  User::where('id',$data->user_id)->pluck('name')->toArray();
+                return $course;
+            })
             ->addColumn('Confirm', function ($data) {
                 // dd($data);
                 return '<button type="submit" data-id="' . $data->id . '" style="color:white" width="70px" class="btn btn-primary confirm">Confirmed</button>';
             })
-            ->rawColumns(['college_id','Confirm'])
+            ->rawColumns(['college_id','Confirm','course_id','user_id'])
             ->addIndexColumn();
     }
 
@@ -92,12 +102,12 @@ class AdmissionCotaDataTable extends DataTable
         return [
             Column::make('id')->data('DT_RowIndex'),
             Column::make('college_id'),
-            Column::make('course_id')->name('course.name'),
-            Column::make('user_id')->name('user.name'),
+            Column::make('course_id')->name('course.name')->title('course'),
+            Column::make('user_id')->name('user.name')->title('user'),
             Column::make('merit'),
             Column::make('addmission_date'),
             Column::make('addmission_code'),
-            Column::make('merit_round_id')->name('meritRound.round_no'),
+            Column::make('merit_round_id')->name('meritRound.round_no')->title('merit round'),
             Column::make('Confirm'),
         ];
     }

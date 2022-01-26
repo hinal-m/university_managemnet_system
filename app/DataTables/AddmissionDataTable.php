@@ -33,11 +33,8 @@ class AddmissionDataTable extends DataTable
                 return implode('<br>', $college);
             })
             ->editColumn('status', function ($data) {
-                if ($data->status == '0') {
-                    return '<a style="color:white" class="badge badge-pill-lg badge-warning status">Next</a>';
-                } else {
-                    return '<a style="color:white" width="70px" class="badge badge-pill-lg badge-success status">Confirm</a>';
-                }
+                    return '<a style="color:white" width="70px" class="badge badge-pill-lg badge-success ">Confirm</a>';
+
             })
             ->rawColumns(['course_id', 'college_id','status','user_id'])
             ->addIndexColumn();
@@ -85,13 +82,13 @@ class AddmissionDataTable extends DataTable
     {
         return [
             Column::make('id')->data('DT_RowIndex'),
-            Column::make('college_id'),
-            Column::make('course_id'),
-            Column::make('user_id'),
-            Column::make('merit'),
+            Column::make('college_id')->title('college'),
+            Column::make('course_id')->title('course'),
+            Column::make('user_id')->title('user'),
+            Column::make('merit')->title('merit'),
             Column::make('addmission_date'),
             Column::make('addmission_code'),
-            Column::make('merit_round_id'),
+            Column::make('merit_round_id')->title('merit round'),
             Column::make('status'),
         ];
     }

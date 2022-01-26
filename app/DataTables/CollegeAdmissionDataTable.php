@@ -68,7 +68,7 @@ class CollegeAdmissionDataTable extends DataTable
         return [
             Column::make('id')->data('DT_RowIndex'),
             Column::make('addmission_id')->title('admission code'),
-            Column::make('confirm_round_id'),
+            Column::make('confirm_round_id')->title('confirm round'),
             Column::make('confirm_merit'),
             Column::make('confirmation_type'),
         ];

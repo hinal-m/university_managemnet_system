@@ -30,6 +30,9 @@ class CollegeMeritDataTable extends DataTable
                 return $data->college->name;
 
             })
+            ->editColumn('course_id', function ($data) {
+                return $data->course->name ?? '-';
+            })
             ->addColumn('action', function ($data) {
                 $result = '<div class="btn-group">';
                     $result .= '<button type="submit" data-id="' . $data->id . '" class="btn-sm btn-danger mr-sm-2 mb-1 delete"><i class="fa fa-trash" aria-hidden="true"></i></button>';
@@ -82,8 +85,8 @@ class CollegeMeritDataTable extends DataTable
         return [
             Column::make('id')->data('DT_RowIndex'),
             Column::make('college_id')->title('College name')->name('college.name'),
-            Column::make('course_id')->name('course.name'),
-            Column::make('merit_round_id')->title('Merit Round No'),
+            Column::make('course_id')->name('course.name')->title('course'),
+            Column::make('merit_round_id')->title('Merit Round No')->title('merit round'),
             Column::make('merit'),
             Column::computed('action'),
             // Column::computed('action')
