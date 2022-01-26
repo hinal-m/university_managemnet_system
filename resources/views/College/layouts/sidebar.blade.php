@@ -33,7 +33,7 @@
             <li class="{{ request()->is('*index*') ? 'active' : '' }}">
                <a href="{{route('college.index')}}" class="text-decoration-none">
                   <i class="fa fa-shopping-basket"></i>
-                  <span class="menu-title" data-i18n="Email">Admission(Merit)</span>
+                  <span class="menu-title" data-i18n="Email">Admission(All)</span>
                </a>
             </li>
             <li class="{{ request()->is('*list*') ? 'active' : '' }}">

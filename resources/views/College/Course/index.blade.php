@@ -41,46 +41,4 @@
 
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-    <script>
-        $(document).on('click', '.delete', function() {
-            var id = $(this).data('id');
-            alert(id);
-            var el = this;
-            swal({
-                    title: "Are you sure?",
-                    text: "You Want To Delete The College Course!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            url: "{{ route('college.delete') }}",
-                            type: 'POST',
-                            dataType: "JSON",
-                            data: {
-                                'id': id,
-                            },
-                            success: function(data) {
-                                alert(data);
-                                if (data) {
-                                    window.LaravelDataTables["collegecourse-table"].draw();
-                                } else {
-                                    swal("oops!", "Something went wrong", "error");
-                                }
-                            }
-                        });
-                        swal("College Course has been deleted!", {
-                            icon: "success",
-                        });
-                    } else {
-                        swal("Your Product is safe!");
-                    }
-                });
-        });
-    </script>
 @endpush

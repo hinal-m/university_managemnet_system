@@ -22,7 +22,7 @@ class CollegeCourseDataTable extends DataTable
                 $result = '<div class="btn-group">';
                     $result .= '<a href="' . route('college.course.edit', $data->id) .
                     '"><button class="btn-sm btn-primary mr-sm-2 mb-1" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>';
-                    $result .= '<button type="submit" data-id="' . $data->id . '" class="btn-sm btn-danger mr-sm-2 mb-1 delete"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+                    // $result .= '<button type="submit" data-id="' . $data->id . '" class="btn-sm btn-danger mr-sm-2 mb-1 delete"><i class="fa fa-trash" aria-hidden="true"></i></button>';
                     return $result;
             })
             ->editColumn('course_id', function ($data) {

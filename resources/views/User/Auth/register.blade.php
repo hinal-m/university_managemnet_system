@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <title>Register</title>
     <style>
-         .error {
+        .error {
             color: red;
         }
 
@@ -28,6 +28,7 @@
         .validation {
             color: red;
         }
+
     </style>
 </head>
 
@@ -39,43 +40,47 @@
                     <div class="card-body p-5">
                         <h1>STUDENT REGISTER</h1>
 
-                        <form action="{{ route('user.create') }}" id="register" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('user.create') }}" id="register" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="login__field">
                                 <i class="login__icon fas fa-user"></i>
-                                <input type="text" class="login__input" value="{{old('name')}}" name="name" placeholder="User name">
+                                <input type="text" class="login__input" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==15)"
+                                 value="{{ old('name') }}" name="name"
+                                    placeholder="User name">
                                 @error('name')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-
-                            </div>
-                            <div class="login__field">
-                                <i class="login__icon fas fa-user"></i>
-                                <input type="text" class="login__input"  value="{{old('email')}}" name="email" placeholder="User email">
-                                @error('email')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-
-                            </div>
-                            <div class="login__field">
-                                <i class="login__icon fas fa-user"></i>
-                                <input type="text" class="login__input" value="{{old('contact')}}" name="contact"
-                                    placeholder="User mobile number">
-                                    @error('contact')
                                     <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
+                                @enderror
+
+                            </div>
+                            <div class="login__field">
+                                <i class="login__icon fas fa-user"></i>
+                                <input type="text" class="login__input" value="{{ old('email') }}" name="email"
+                                    placeholder="User email">
+                                @error('email')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                            <div class="login__field">
+                                <i class="login__icon fas fa-user"></i>
+                                <input type="text" class="login__input" value="{{ old('contact') }}" name="contact"
+                                    placeholder="User mobile number">
+                                @error('contact')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 
                             </div>
                             <div class="form__group">
                                 <label class="d-block"><b>GENDER:</b></label>
                                 <div class="form__radio d-inline-block mr-2">
-                                    <input type="radio" class="form__radio-input"  id="male" value="m" name="gender">
+                                    <input type="radio" class="form__radio-input" id="male" value="m" name="gender">
 
                                     <label for="male">
                                         <span class="form__radio-button"></span>
@@ -83,7 +88,7 @@
                                     </label>
                                 </div>
                                 <div class="form__radio d-inline-block mr-2">
-                                    <input type="radio" class="form__radio-input"  id="female" value="f" name="gender">
+                                    <input type="radio" class="form__radio-input" id="female" value="f" name="gender">
 
 
                                     <label for="female">
@@ -100,69 +105,72 @@
                                     </label>
                                 </div>
                                 @error('gender')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div><br>
                             <div class="form__group">
                                 <label><b>DOB:</b></label>
                                 <div class="form-group">
-                                    <input type='tax' class="form-control datepicker" value="{{old('dob')}}" name="dob" id="dob"
-                                        placeholder='Select Date' style='width: 180px;' autocomplete="off">
-                                        @error('dob')
+                                    <input type='tax' class="form-control datepicker" value="{{ old('dob') }}"
+                                        name="dob" id="dob" placeholder='Select Date' style='width: 180px;'
+                                        autocomplete="off">
+                                    @error('dob')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                        @enderror
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="login__field">
                                 <i class="login__icon fas fa-user"></i>
-                                <input type="text" class="login__input" name="address" value="{{old('address')}}" placeholder="User address">
+                                <input type="text" class="login__input" name="address" value="{{ old('address') }}"
+                                    placeholder="User address">
                                 @error('address')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                             <div class="login__field">
                                 <i class="login__icon fas fa-user"></i>
-                                <input type="text" class="login__input" value="{{old('adhaar_no')}}" name="adhaar_no"
-                                    placeholder="User Adhar card no">
-                                    @error('adhaar_no')
+                                <input type="text" class="login__input" value="{{ old('adhaar_no') }}"
+                                    name="adhaar_no" onKeyPress="if(this.value.length==16) return false;" placeholder="User Adhar card no">
+                                @error('adhaar_no')
                                     <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
-                            </div>
-                            <div class="login__field">
-                                <i class="login__icon fas fa-lock"></i>
-                                <input type="password" class="login__input" value="{{old('password')}}" name="password" id="password" placeholder="Password">
-                                @error('password')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
                                 @enderror
                             </div>
                             <div class="login__field">
                                 <i class="login__icon fas fa-lock"></i>
-                                <input type="password" class="login__input" value="{{old('confirm_password')}}" name="confirm_password"
-                                    placeholder="Confirm Password">
-                                    @error('confirm_password')
+                                <input type="password" class="login__input" value="{{ old('password') }}"
+                                    name="password" id="password" placeholder="Password">
+                                @error('password')
                                     <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
+                                @enderror
                             </div>
                             <div class="login__field">
                                 <i class="login__icon fas fa-lock"></i>
-                                <input type="file" class="login__input" value="{{old('image')}}" name="image">
+                                <input type="password" class="login__input" value="{{ old('confirm_password') }}"
+                                    name="confirm_password" placeholder="Confirm Password">
+                                @error('confirm_password')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="login__field">
+                                <i class="login__icon fas fa-lock"></i>
+                                <input type="file" class="login__input" value="{{ old('image') }}" name="image">
                                 @error('image')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
                             <button type="submit" class="button login__submit">
@@ -188,7 +196,10 @@
             maxDate: 0
         });
     });
+
+
     $(document).ready(function() {
+
         $('#register').validate({
             rules: {
                 name: {
@@ -201,14 +212,17 @@
                 },
                 address: {
                     required: true,
+                    noSpace: true
 
                 },
                 adhaar_no: {
                     required: true,
+                    max: 16
 
                 },
                 dob: {
                     required: true,
+                    noSpace: true
 
                 },
                 gender: {
