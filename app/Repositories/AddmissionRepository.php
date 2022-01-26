@@ -58,9 +58,10 @@ class AddmissionRepository implements AddmissionInterface
         $total_common_setting_mark = CommonSetting::sum('marks');
         // dd($total_common_setting_mark);
         $total_marks=0;
+        // dd($student_mark);
         foreach($student_mark as $value)
         {
-            // dd($value->commonSetting->marks);
+            dd($value->commonSetting->marks);
             $obtain_mark = $value->obtain_mark * $value->commonSetting->marks /100;
 
             $total_marks += $obtain_mark;
