@@ -25,16 +25,16 @@
                                         <select id="course_id" name="course_id" class="form-control course">
                                             <option value="" selected disabled>Select Course</option>
                                             @foreach ($college_merit['college_course'] as $value)
-                                                <option value="{{ $value->Course->id }}">{{ $value->Course->name }}</option>
+                                                <option value="{{ $value->Course->id }}">{{ $value->Course->name }}
+                                                </option>
                                             @endforeach
                                         </select>
-
                                     </div>
-                                    <div class="form-group mb-2 " >
+                                    <div class="form-group mb-2 ">
                                         <label for="reserved_seat">Select Round</label>
-                                                  <select name="round_no" id="round_no" class="form-control round">
-                                                      <option value="">Select round</option>
-                                                  </select>
+                                        <select name="round_no" id="round_no" class="form-control round">
+                                            <option value="">Select round</option>
+                                        </select>
                                     </div>
                                     <div class="form-group mb-2">
                                         <label for="seat_no">Merit</label>
@@ -44,10 +44,10 @@
                                     </div>
 
 
-                                    <button type="submit" class="btn btn-primary mr-2"><i
+                                    <button type="submit" class="btn gradient-pomegranate big-shadow"><i
                                             class="ft-check-square mr-1"></i>Save</button>
-                                    <a type="button" href="{{route('college.merit.index')}}" class="btn btn-secondary"><i
-                                            class="ft-x mr-1"></i>Cancel</a>
+                                    <a type="button" href="{{ route('college.merit.index') }}"
+                                        class="btn gradient-mint shadow-z-4"><i class="ft-x mr-1"></i>Cancel</a>
                                 </form>
                             </div>
                         </div>
@@ -75,10 +75,11 @@
                     },
                     success: function(data) {
                         console.log(data);
-                        var htm='';
-                        htm+='<option value="">Select Round</option>';
-                        $.each(data.data,function(key,val){
-                            htm+='<option value='+val['round_no']+'>Round No: '+val['round_no']+'</option>'
+                        var htm = '';
+                        htm += '<option value="">Select Round</option>';
+                        $.each(data.data, function(key, val) {
+                            htm += '<option value=' + val['round_no'] + '>Round No: ' + val[
+                                'round_no'] + '</option>'
                         })
                         $('.round').html(htm);
                     }

@@ -28,28 +28,28 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('check', [LoginController::class, 'check'])->name('check');
 
     Route::get('/register', [RegisterController::class, 'registerFormShow'])->name('register');
-    Route::post('/create', [RegisterController::class, 'register'])->name('create');
+    Route::post('/create',  [RegisterController::class, 'register'])->name('create');
 });
 
 Route::group(['middleware' => 'auth:user'], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/confirm', [DashboardController::class, 'confirm'])->name('confirm');
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/confirm',  [DashboardController::class, 'confirm'])->name('confirm');
+    Route::post('/logout',   [LoginController::class, 'logout'])->name('logout');
 
     //Change Password
     Route::get('/changePassword',      [DashboardController::class, 'showChangePasswordGet'])->name('changePasswordGet');
-    Route::post('/changePasswordPost',     [DashboardController::class, 'changePasswordPosts'])->name('user.changePasswordPost');
+    Route::post('/changePasswordPost', [DashboardController::class, 'changePasswordPosts'])->name('user.changePasswordPost');
 
     //Profile
     Route::get('/profile/{id}',      [DashboardController::class, 'showProfile'])->name('profile');
-    Route::post('/edit-profile',      [DashboardController::class, 'editProfile'])->name('edit_profile');
+    Route::post('/edit-profile',     [DashboardController::class, 'editProfile'])->name('edit_profile');
 
     //addminssion
     Route::resource('addmission','AddmissionController');
 
     //student marks
-    Route::resource('marks','StudentMarkController')->except('destroy');
+    Route::resource('marks',    'StudentMarkController')->except('destroy');
     Route::post('delete',     [StudentMarkController::class, 'destroy'])->name('delete');
 
 

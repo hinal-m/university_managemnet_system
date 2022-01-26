@@ -17,12 +17,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class AdmissionCotaDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
+
     public function dataTable($query)
     {
         return datatables()
@@ -48,12 +43,6 @@ class AdmissionCotaDataTable extends DataTable
             ->addIndexColumn();
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\AdmissionCotum $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query(Addmission $model)
     {
         $college_merit = CollegeMerit::where('college_id', Auth::guard('college')->user()->id)->first();
@@ -71,11 +60,6 @@ class AdmissionCotaDataTable extends DataTable
         return $model->with('meritRound')->newQuery();
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html()
     {
         return $this->builder()
@@ -92,11 +76,6 @@ class AdmissionCotaDataTable extends DataTable
             );
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns()
     {
         return [
@@ -112,11 +91,6 @@ class AdmissionCotaDataTable extends DataTable
         ];
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
     protected function filename()
     {
         return 'AdmissionCota_' . date('YmdHis');

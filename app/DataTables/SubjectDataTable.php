@@ -23,8 +23,8 @@ class SubjectDataTable extends DataTable
                     return '<a data-id="' . $data->id . '"  style="color:white" width="70px" class="badge badge-pill-lg badge-success status">Active</a>';
                 }
             })
-                ->rawColumns(['status'])
-                ->addIndexColumn();
+            ->rawColumns(['status'])
+            ->addIndexColumn();
     }
 
     public function query(Subject $model)
@@ -35,18 +35,18 @@ class SubjectDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('subject-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+            ->setTableId('subject-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(1)
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            );
     }
 
     protected function getColumns()

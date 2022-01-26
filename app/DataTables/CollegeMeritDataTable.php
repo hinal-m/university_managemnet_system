@@ -15,12 +15,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class CollegeMeritDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
+
     public function dataTable($query)
     {
         return datatables()
@@ -42,22 +37,11 @@ class CollegeMeritDataTable extends DataTable
             ->addIndexColumn();
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\CollegeMerit $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query(CollegeMerit $model)
     {
         return $model->where('college_id',Auth::guard('college')->user()->id)->with('college')->with('course')->with('Course')->newQuery();
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html()
     {
         return $this->builder()
@@ -75,11 +59,6 @@ class CollegeMeritDataTable extends DataTable
                     );
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns()
     {
         return [
@@ -89,15 +68,10 @@ class CollegeMeritDataTable extends DataTable
             Column::make('merit_round_id')->title('Merit Round No')->title('merit round'),
             Column::make('merit'),
             Column::computed('action'),
-            // Column::computed('action')
         ];
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
+
     protected function filename()
     {
         return 'CollegeMerit_' . date('YmdHis');

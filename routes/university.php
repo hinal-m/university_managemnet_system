@@ -28,15 +28,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Auth'], function () {
 
-    Route::get('login', [LoginController::class, 'loginShow'])->name('university.login');
-
+    Route::get('login',  [LoginController::class, 'loginShow'])->name('university.login');
     Route::post('check', [LoginController::class, 'check'])->name('university.check');
 });
 
 Route::group(['middleware' => 'auth:university'], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/logout', [LoginController::class, 'logout'])->name('university.logout');
+    Route::post('/logout',   [LoginController::class, 'logout'])->name('university.logout');
 
 
     //Change Password
@@ -44,7 +43,7 @@ Route::group(['middleware' => 'auth:university'], function () {
     Route::post('/changePassword',     [DashboardController::class, 'changePasswordPost'])->name('changePasswordPost');
 
     //COLLEG
-    Route::resource('college',          'CollegeController')->except('destroy');
+    Route::resource('college',      'CollegeController')->except('destroy');
     Route::post('delete',           [CollegeController::class, 'destroy'])->name('delete');
     Route::get('status',            [CollegeController::class, 'status'])->name('status');
 

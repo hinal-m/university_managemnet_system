@@ -58,7 +58,6 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        alert(willDelete);
                         $.ajax({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -78,11 +77,11 @@
                                 }
                             }
                         });
-                        swal("College Course has been deleted!", {
+                        swal("Student Admission Confirmed Succesfully!", {
                             icon: "success",
                         });
                     } else {
-                        swal("Your Product is safe!");
+                        swal("Your Student confirmation is safe!");
                     }
                 });
         });

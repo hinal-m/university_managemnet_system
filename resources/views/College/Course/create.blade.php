@@ -48,9 +48,9 @@
                                     </div>
 
 
-                                    <button type="submit" class="btn btn-primary mr-2"><i
+                                    <button type="submit" class="btn gradient-pomegranate big-shadow"><i
                                             class="ft-check-square mr-1"></i>Save</button>
-                                    <a type="button" href="" class="btn btn-secondary"><i
+                                    <a type="button" href="" class="btn gradient-mint shadow-z-4"><i
                                             class="ft-x mr-1"></i>Cancel</a>
                                 </form>
                             </div>
