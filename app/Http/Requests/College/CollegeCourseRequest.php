@@ -14,6 +14,10 @@ class CollegeCourseRequest extends FormRequest
     public function rules()
     {
         return [
+
+
+
+
             'course_id' => 'required|not_in:0|unique:college_courses,course_id,NULL,id',
             'reserved_seat' => 'required|numeric',
             'merit_seat' => 'required|numeric',

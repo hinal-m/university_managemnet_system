@@ -55,10 +55,11 @@ class AddmissionRepository implements AddmissionInterface
             ]);
         }
         $student_mark = StudentMark::with('commonSetting')->where('user_id',Auth::guard('user')->user()->id)->get();
+
         $total_common_setting_mark = CommonSetting::sum('marks');
         // dd($total_common_setting_mark);
         $total_marks=0;
-        // dd($student_mark);
+        dd($student_mark);
         foreach($student_mark as $value)
         {
             // dd($value->obtain_mark);
