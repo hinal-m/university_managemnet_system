@@ -60,7 +60,7 @@ class AddmissionRepository implements AddmissionInterface
         foreach($student_mark as $value)
         {
             // dd($value->commonSetting->marks);
-            $obtain_mark = ($value->obtain_mark * $value->commonSetting->marks) /100;
+            $obtain_mark = $value->obtain_mark * $value->commonSetting->marks /100;
 
             $total_marks += $obtain_mark;
         }
