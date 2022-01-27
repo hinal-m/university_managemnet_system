@@ -9,6 +9,7 @@ use App\Models\CollegeCourse;
 use App\Models\Course;
 use App\Repositories\CollegeCourseRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CollegeCourseController extends Controller
 {
@@ -32,8 +33,15 @@ class CollegeCourseController extends Controller
 
     public function store(CollegeCourseRequest $request)
     {
-        $college_course = $this->college_course->store($request->all());
-        return response()->json(['data' => $college_course]);
+       
+        $course_repeat = CollegeCourse::where('college_id', Auth::guard('college')->user()->id)->where('course_id', $request->course_id)->first();
+
+        if(isset($course_repeat)){
+            return response()->json(['status' => 1]);
+        }else{
+            $college_course = $this->college_course->store($request->all());
+            return response()->json(['data' => $college_course,'status'=> 2]);
+        }
     }
 
     public function show($id)

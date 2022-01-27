@@ -146,12 +146,16 @@
                             processData: false,
                             cache: false,
                             success: function(query) {
-                                if (query) {
+                                if (query.status === 2) {
                                     swal("Inserted!",
                                         "College Merit Inserted Successfully.",
                                         "success");
                                     window.location.href =
                                         "{{ route('college.merit.index') }}";
+                                }else if(query.status === 1){
+                                    swal("danger!",
+                                        "You Hvae Already Inserted This Merit.",'error'
+                                       );
                                 }
                             },
                             error: function(data) {

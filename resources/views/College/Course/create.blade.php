@@ -130,12 +130,16 @@
                             processData: false,
                             cache: false,
                             success: function(query) {
-                                if (query) {
+                                if (query.status === 2) {
                                     swal("Inserted!",
                                         "College Course Inserted Successfully.",
                                         "success");
                                     window.location.href =
                                         "{{ route('college.course.index') }}";
+                                }else if(query.status === 1){
+                                    swal("danger!",
+                                        "You Hvae Already Inserted This Course.",'error'
+                                       );
                                 }
                             },
                             error: function(data) {

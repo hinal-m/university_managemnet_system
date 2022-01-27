@@ -26,14 +26,22 @@ class CollegeMeritController extends Controller
     public function create()
     {
         $college_merit = $this->college_merit->create();
-        return view('College.merit.create',compact('college_merit'));
+        return view('College.merit.create', compact('college_merit'));
     }
 
     public function store(Request $request)
     {
-        $college_merit = $this->college_merit->store($request->all());
-        return response()->json(['data' => $college_merit]);
+
+        $merit_repeat = CollegeMerit::where('college_id', Auth::guard('college')->user()->id)->where('merit', $request->merit)->first();
+
+        if (isset($merit_repeat)) {
+            return response()->json(['status' => 1]);
+        } else {
+            $college_merit = $this->college_merit->store($request->all());
+            return response()->json(['data' => $college_merit, 'status' => 2]);
+        }
     }
+
 
     public function show($id)
     {
@@ -46,9 +54,7 @@ class CollegeMeritController extends Controller
 
         $college_course = CollegeCourse::where('College_id', Auth::guard('college')->user()->id)->get();
 
-        return view('College.merit.edit',compact('college_merit','college_course'));
-
-
+        return view('College.merit.edit', compact('college_merit', 'college_course'));
     }
 
     public function update(Request $request, $id)
@@ -64,7 +70,7 @@ class CollegeMeritController extends Controller
 
     public function getRound(Request $request)
     {
-        $data = MeritRound::select('round_no')->where('course_id',$request['id'])->get();
+        $data = MeritRound::select('round_no')->where('course_id', $request['id'])->get();
         return response()->json([
             'data' => $data
         ]);

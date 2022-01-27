@@ -18,7 +18,7 @@ class CollegeCourseRequest extends FormRequest
 
 
 
-            'course_id' => 'required|not_in:0|unique:college_courses,course_id,NULL,id',
+            'course_id' => 'required|not_in:0',
             'reserved_seat' => 'required|numeric',
             'merit_seat' => 'required|numeric',
 
@@ -28,7 +28,6 @@ class CollegeCourseRequest extends FormRequest
     {
         return [
             'course_id.required' => 'Please select Course',
-            'course_id.unique' => ' College Course Has Been Already Taken',
             'reserved_seat.required' => 'Please Enter ReservedSeat No',
             'reserved_seat.numeric' => 'Please Enter Only Number',
             'merit_seat.required' => 'Please Enter Merit Seat No',
