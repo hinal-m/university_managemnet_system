@@ -15,11 +15,7 @@
                                     <label for="basicInput">Round No</label>
                                     <input type="text" class="form-control mb-2" name="round_no"
                                         value="{{ old('round_no') }}" placeholder="Name">
-                                    @error('round_no')
-                                        <span class="text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+
 
 
                                 </div>
@@ -30,11 +26,7 @@
                                         @foreach ($course as $value)
                                             <option value="{{ $value->id }}">{{ $value->name }}</option>
                                         @endforeach
-                                        @error('course_id')
-                                            <span class="text-danger" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+
                                     </select>
                                 </div>
                                 <div class="row">
@@ -44,11 +36,7 @@
                                         </label>
                                         <input type='tax' class="form-control datepicker" name="start_date" id="start_date"
                                             placeholder='Select Date' style='width: 180px;' autocomplete="off">
-                                        @error('start_date')
-                                            <span class="text-danger" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+
 
                                     </div>
                                     <div class="form-group col-md-6">
@@ -57,11 +45,7 @@
                                         </label>
                                         <input type='tax' name="end_date" class="form-control datepicker" id='end_date'
                                             placeholder='Select Date' style='width: 180px;' autocomplete="off">
-                                        @error('end_date')
-                                            <span class="text-danger" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -69,11 +53,6 @@
                                     <input type='tax' class="form-control datepicker" value="{{ old('marit_result') }}"
                                         name="marit_result" id="marit_result" placeholder='Select Date'
                                         style='width: 180px;' autocomplete="off">
-                                    @error('marit_result')
-                                        <span class="text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
 
 
@@ -128,6 +107,7 @@
                 rules: {
                     round_no: {
                         required: true,
+                        max:3,
                         digits: true
                     },
                     course_id: {
@@ -206,6 +186,14 @@
                                     "{{ route('university.marit.index') }}";
                             }
                         },
+                        error: function(data) {
+                            $.each(data.responseJSON.errors, function(
+                                key, value) {
+                                $('[name=' + key + ']').after(
+                                    '<span class="text-strong" style="color:red">' +
+                                    value + '</span>')
+                            });
+                        }
                     });
                 } else {
                     swal("Cancelled", "Your record is safe :)", "error");
