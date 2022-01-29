@@ -81,13 +81,13 @@ class AdmissionCotaDataTable extends DataTable
         return [
             Column::make('id')->data('DT_RowIndex'),
             // Column::make('college_id'),
+            Column::make('Confirm'),
             Column::make('course_id')->title('course'),
             Column::make('user_id')->name('user.name')->title('user'),
             Column::make('merit'),
             Column::make('addmission_date'),
             Column::make('addmission_code'),
             Column::make('merit_round_id')->name('meritRound.round_no')->title('merit round'),
-            Column::make('Confirm'),
         ];
     }
 
