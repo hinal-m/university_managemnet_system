@@ -33,6 +33,7 @@
     </div>
 @endsection
 @push('js')
+
     {!! $dataTable->scripts() !!}
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" id="submit" class="btn btn-primary btn-icon-text">
-                                        <i class="mdi mdi-file-check btn-icon-prepend" id="submit"></i> Update</button>
+                                        <i class="mdi mdi-file-check btn-icon-prepend" id="submit"></i> Submit</button>
                                     <a href="{{ route('university.index') }}" class="btn btn-dark">Go Back!</a>
                                 </div>
                             </form>
