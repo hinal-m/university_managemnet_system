@@ -19,13 +19,14 @@ class AddmissionController extends Controller
     {
         $this->addmission = $addmission;
     }
-    
+
     public function create()
     {
         $subjects = Subject::with('userStudentMark:id,subject_id,obtain_mark')->get();
         $student_mark = StudentMark::where('user_id',Auth::guard('user')->user()->id)->get();
         $toDate = Carbon::now()->format('Y-m-d');
         $round= MeritRound::where('status','1')->where('end_date','>=',$toDate)->get()->toArray();
+        dd($round);
         $addmission = $this->addmission->create();
         return view('User.addmission.create',compact(['addmission','round','toDate','subjects','student_mark']));
     }
