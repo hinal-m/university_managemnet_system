@@ -15,6 +15,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
+                                @dd($round)
                                 @if ($round)
                                     <form id="submit_form" action="{{ route('user.addmission.store') }}" method="post"
                                         enctype="multipart/form-data">
