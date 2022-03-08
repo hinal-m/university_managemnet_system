@@ -26,6 +26,21 @@ class DashboardController extends Controller
         return view('University.layouts.content',compact(['college','student','admission']));
     }
 
+    public function chart()
+    {
+        // dd(1);
+        $college = College::all()->count();
+        $student = User::all()->count();
+        $admission = Addmission::all()->count();
+        $result = array(
+            'college' => $college,
+            'student' => $student,
+            'admission' => $admission
+        );
+        // dd($result);
+        return response()->json(['data'=> $result]);
+    }
+
     //change password
     public function showChangePasswordGet()
     {

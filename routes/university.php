@@ -30,11 +30,13 @@ Route::group(['namespace' => 'Auth'], function () {
 
     Route::get('login',  [LoginController::class, 'loginShow'])->name('university.login');
     Route::post('check', [LoginController::class, 'check'])->name('university.check');
+    Route::get('refreshcaptcha', [LoginController::class,'refreshCaptcha'])->name('refreshcaptcha');
 });
 
 Route::group(['middleware' => 'auth:university'], function () {
-
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+		Route::get('get-all', [DashboardController::class, 'chart'])->name('chart');
+
     Route::post('/logout',   [LoginController::class, 'logout'])->name('university.logout');
 
 

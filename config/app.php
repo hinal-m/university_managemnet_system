@@ -163,6 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        LaravelCaptcha\Providers\LaravelCaptchaServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -235,6 +237,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
 
     ],
 

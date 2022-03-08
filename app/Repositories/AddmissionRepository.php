@@ -44,6 +44,7 @@ class AddmissionRepository implements AddmissionInterface
     {
         for($i=0;$i<count($data['id']);$i++)
         {
+            // dd($data['mark']);
             StudentMark::updateOrCreate([
                 'subject_id'=> $data['id'][$i],
                 'user_id' => Auth::guard('user')->user()->id,
@@ -57,12 +58,9 @@ class AddmissionRepository implements AddmissionInterface
         $student_mark = StudentMark::with('commonSetting')->where('user_id',Auth::guard('user')->user()->id)->get();
 
         $total_common_setting_mark = CommonSetting::sum('marks');
-        // dd($total_common_setting_mark);
         $total_marks=0;
-        // dd($student_mark);
         foreach($student_mark as $value)
         {
-            // dd($value->obtain_mark);
             $obtain_mark =( $value->obtain_mark * $value->commonSetting->marks )/100;
 
             $total_marks += $obtain_mark;
@@ -78,6 +76,7 @@ class AddmissionRepository implements AddmissionInterface
         $addmission = Addmission::updateOrCreate([
             'user_id' => Auth::guard('user')->user()->id,
         ],[
+            
             'college_id'=> (array)$data['college_id'],
             'user_id' => Auth::guard('user')->user()->id,
             'merit' => round($merit,2),

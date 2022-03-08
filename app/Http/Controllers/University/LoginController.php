@@ -16,8 +16,10 @@ class LoginController extends Controller
     {
         $request->validate([
             'email' => 'required|email|exists:universities,email',
-            'password' => 'required|min:3|max:30'
+            'password' => 'required|min:3|max:30',
+            'captcha' => 'required|captcha'
         ], [
+            'captcha.captcha'=>'Invalid captcha code.',
             'email.exists' => 'This email is not exists on admins table',
         ]);
         $creds = $request->only('email', 'password');
@@ -33,5 +35,10 @@ class LoginController extends Controller
     {
         Auth::guard('university')->logout();
         return redirect()->route('university.university.login');
+    }
+
+    public function refreshCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
     }
 }

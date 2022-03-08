@@ -6,6 +6,7 @@ use App\DataTables\CollegeDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\College\StoreRequest;
 use App\Http\Requests\College\UpdateRequest;
+use App\Http\Traits\CollegeTrait;
 use App\Models\College;
 use App\Repositories\CollegeRepository;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 class CollegeController extends Controller
 {
     protected $college;
+    use CollegeTrait;
     public function __construct(CollegeRepository $college)
     {
         $this->college = $college;
@@ -20,6 +22,7 @@ class CollegeController extends Controller
 
     public function index(CollegeDataTable $dataTable)
     {
+        $college = $this->collegeAll();
         return $dataTable->render('University.College.index');
     }
 
