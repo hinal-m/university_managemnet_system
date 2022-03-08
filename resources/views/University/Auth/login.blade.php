@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="{{asset('../css/login_1.css')}}" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel="stylesheet", integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" , rel="stylesheet" , integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" , crossorigin="anonymous">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -55,9 +56,16 @@
                                     <span>{!! captcha_img() !!}</span>
                                     <button type="button" class="btn btn-success"><i class="fa fa-refresh" id="refresh"></i></button>
                                 </div>
+                                <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
+                                @if($errors->has('g-recaptcha-response'))
+
+                                <span class="invalid-feedback" style="display:block">
+                                    <strong>{{$errors->first('g-recaptcha-response')}}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="form-group">
-                                <input type="password" name="captcha" placeholder ="Enter Captcha" value="{{old('password')}}" class="form-control" i>
+                                <input type="password" name="captcha" placeholder="Enter Captcha" value="{{old('password')}}" class="form-control" i>
                                 @error('captcha')
                                 <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -77,6 +85,7 @@
                         </form>
                     </div>
                 </div>
+
                 <div class="col-lg-3 col-md-2"></div>
             </div>
         </div>

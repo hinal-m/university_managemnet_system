@@ -9,6 +9,7 @@ use App\Http\Controllers\University\LoginController;
 use App\Http\Controllers\University\MaritRoundController;
 use App\Http\Controllers\University\StudentController;
 use App\Http\Controllers\University\SubjectController;
+use App\Models\University;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,6 +75,9 @@ Route::group(['middleware' => 'auth:university'], function () {
 
     //subject
     Route::get('subject',   [SubjectController::class,'index'])->name('subject_list');
+
+
+    Route::view('like', 'University.like');
 
 
 

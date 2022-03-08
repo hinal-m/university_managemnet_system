@@ -5,6 +5,7 @@ namespace App\Http\Controllers\University;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\Captcha;
 
 class LoginController extends Controller
 {
@@ -17,7 +18,8 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'required|email|exists:universities,email',
             'password' => 'required|min:3|max:30',
-            'captcha' => 'required|captcha'
+            // 'captcha' => 'required|captcha',
+            'g-recaptcha-response' => new Captcha(),
         ], [
             'captcha.captcha'=>'Invalid captcha code.',
             'email.exists' => 'This email is not exists on admins table',
