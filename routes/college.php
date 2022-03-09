@@ -3,6 +3,7 @@
 use App\Http\Controllers\College\CollegeCourseController;
 use App\Http\Controllers\College\CollegeMeritController;
 use App\Http\Controllers\College\DashboardController;
+use App\Http\Controllers\College\GoogleController;
 use App\Http\Controllers\College\LoginController;
 use App\Http\Controllers\College\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::group(['namespace' => 'Auth'], function () {
+
+    Route::get('google', [GoogleController::class, 'redirectToGoogle'])->name('redirectToGoogle');
+    Route::get('google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
     Route::get('login',    [LoginController::class, 'loginShow'])->name('college.login');
     Route::post('check',   [LoginController::class, 'check'])->name('college.check');

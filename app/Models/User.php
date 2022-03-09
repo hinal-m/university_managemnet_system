@@ -28,7 +28,7 @@ class User extends Authenticatable
         'image',
     ];
 
-    public function getImageAttribute($value)
+    public function getImageAttribute($value)  
     {
         return $value ? asset('storage/student' . '/' . $value) : NULL;
     }

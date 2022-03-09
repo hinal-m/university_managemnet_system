@@ -1,14 +1,18 @@
 <?php
 
+use App\Http\Controllers\University\GoogleController;
 use App\Http\Controllers\University\AddmissionController;
 use App\Http\Controllers\University\DashboardController;
 use App\Http\Controllers\University\CollegeController;
 use App\Http\Controllers\University\CommonSettingController;
 use App\Http\Controllers\University\CourseController;
+use App\Http\Controllers\University\FacebookController;
+use App\Http\Controllers\University\GithubController;
 use App\Http\Controllers\University\LoginController;
 use App\Http\Controllers\University\MaritRoundController;
 use App\Http\Controllers\University\StudentController;
 use App\Http\Controllers\University\SubjectController;
+use App\Http\Controllers\University\TwitterController;
 use App\Models\University;
 use Illuminate\Support\Facades\Route;
 
@@ -29,14 +33,28 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Auth'], function () {
 
+    //social route for google
+    Route::get('google', [GoogleController::class, 'redirectToGoogle'])->name('redirectToGoogle');
+    Route::get('google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+    //social login for facebook
+    Route::get('facebook', [FacebookController::class, 'redirectToFacebook'])->name('redirectToFacebook');
+    Route::get('facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+
+    Route::get('twitter', [TwitterController::class, 'redirectToTwitter'])->name('loginwithTwitter');
+    Route::get('callback/twitter', [TwitterController::class, 'handleTwitterCallback']);
+
+    Route::get('github', [GithubController::class, 'gitRedirect'])->name('gitRedirect');
+    Route::get('callback/github', [GitHubController::class, 'gitCallback']);
+
     Route::get('login',  [LoginController::class, 'loginShow'])->name('university.login');
     Route::post('check', [LoginController::class, 'check'])->name('university.check');
-    Route::get('refreshcaptcha', [LoginController::class,'refreshCaptcha'])->name('refreshcaptcha');
+    Route::get('refreshcaptcha', [LoginController::class, 'refreshCaptcha'])->name('refreshcaptcha');
 });
 
 Route::group(['middleware' => 'auth:university'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-		Route::get('get-all', [DashboardController::class, 'chart'])->name('chart');
+    Route::get('get-all', [DashboardController::class, 'chart'])->name('chart');
 
     Route::post('/logout',   [LoginController::class, 'logout'])->name('university.logout');
 
@@ -63,7 +81,7 @@ Route::group(['middleware' => 'auth:university'], function () {
 
     //Course
     Route::get('/course-list', [CourseController::class, 'index'])->name('course_list');
-    Route::get('course-status',[CourseController::class, 'status'])->name('course_status');
+    Route::get('course-status', [CourseController::class, 'status'])->name('course_status');
 
     //marit round
     Route::resource('marit',    'MaritRoundController');
@@ -71,16 +89,11 @@ Route::group(['middleware' => 'auth:university'], function () {
     Route::get('merit-status',  [MaritRoundController::class, 'status'])->name('merit_status');
 
     //admission
-    Route::get('admission', [AddmissionController::class,'index'])->name('admission_list');
+    Route::get('admission', [AddmissionController::class, 'index'])->name('admission_list');
 
     //subject
-    Route::get('subject',   [SubjectController::class,'index'])->name('subject_list');
+    Route::get('subject',   [SubjectController::class, 'index'])->name('subject_list');
 
 
     Route::view('like', 'University.like');
-
-
-
-
-
 });

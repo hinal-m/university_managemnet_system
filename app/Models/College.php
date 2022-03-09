@@ -18,6 +18,7 @@ class College extends Authenticatable
         'logo',
         'status',
         'password',
+        'google_id'
     ];
     public function getLogoAttribute($value)
     {

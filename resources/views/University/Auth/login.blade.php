@@ -52,10 +52,10 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <div class="captcha">
+                                <!-- <div class="captcha">
                                     <span>{!! captcha_img() !!}</span>
                                     <button type="button" class="btn btn-success"><i class="fa fa-refresh" id="refresh"></i></button>
-                                </div>
+                                </div> -->
                                 <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
                                 @if($errors->has('g-recaptcha-response'))
 
@@ -64,14 +64,14 @@
                                 </span>
                                 @endif
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <input type="password" name="captcha" placeholder="Enter Captcha" value="{{old('password')}}" class="form-control" i>
                                 @error('captcha')
                                 <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div>
+                            </div> -->
 
 
                             <div class="col-lg-12 loginbttm">
@@ -80,6 +80,26 @@
                                 </div>
                                 <div class="col-lg-6 login-btm login-button">
                                     <button type="submit" class="btn btn-outline-primary">LOGIN</button>
+                                    <div class="flex items-center justify-end mt-4">
+                                        <a href="{{ route('university.redirectToGoogle') }}">
+                                            <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+                                        </a>
+                                    </div>
+                                    <div class="flex items-center justify-end mt-4">
+                                        <a href="{{ route('university.redirectToFacebook') }}" class="fa fa-facebook-square btn btn-lg btn-primary btn-block">
+                                            <strong>Login With Facebook</strong>
+                                        </a>
+                                    </div>
+                                    <div class="flex items-center justify-end mt-4">
+                                        <a class="btn" href="{{ route('university.loginwithTwitter') }}" style="background: #1E9DEA; padding: 10px; width: 100%; text-align: center; display: block; border-radius:4px; color: #ffffff;">
+                                            Login with Twitter
+                                        </a>
+                                    </div>
+                                    <div class="flex items-center justify-end mt-4">
+                                        <a class="btn" href="{{ route('university.gitRedirect') }}" style="background: #313131; color: #ffffff; padding: 10px; width: 100%; text-align: center; display: block; border-radius:3px;">
+                                            Login with GitHub
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -90,6 +110,7 @@
             </div>
         </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 

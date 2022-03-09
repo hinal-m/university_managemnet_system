@@ -13,5 +13,6 @@ class University extends Authenticatable
         'name',
         'email',
         'password',
+        'facebook_id',
     ];
 }
