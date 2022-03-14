@@ -12,17 +12,14 @@ class GithubController extends Controller
 {
     public function gitRedirect()
     {
-        // dd(1);
         return Socialite::driver('github')->redirect();
     }
 
     public function gitCallback()       
     {
-        // dd(1);
         try {
 
             $university = Socialite::driver('github')->stateless()->user();
-            // dd($university);
 
             $findUniversity = University::where('github_id', $university->id)->first();
 

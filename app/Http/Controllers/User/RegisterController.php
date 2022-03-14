@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\College\StoreRequest;
 use App\Http\Requests\User\RegisterRequest;
 use App\Models\User;
+use App\Notifications\WelcomeEmailNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,22 +19,23 @@ class RegisterController extends Controller
     }
     public function register(RegisterRequest $request)
     {
-        $collge = new User();
-        $collge->name = $request->name;
-        $collge->email = $request->email;
-        $collge->address = $request->address;
-        $collge->contact_no = $request->contact;
-        $collge->gender = $request->gender;
-        $collge->adhaar_card_no = $request->adhaar_no;
-        $collge->dob = $request->dob;
-        $image = uploadFile($request['image'], 'student');
-        $collge->image = $image;
-        $collge->password = Hash::make($request->password);
-        $save = $collge->save();
-        if ($save) {
-            return redirect()->route('user.login');
+        $user = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'address' => $request['address'],
+            'contact_no' => $request['contact'],
+            'gender' => $request['gender'],
+            'adhaar_card_no' => $request['adhaar_no'],
+            'dob' => $request['dob'],
+            $image = uploadFile($request['image'], 'student'),
+            'image' => $image,
+            'password' => Hash::make($request['password']),
+        ]);
+        $user->notify(new WelcomeEmailNotification($user));
+        if ($user) {
+            return redirect()->back()->with('success','Please Check Your Mail..Than After Login');
         } else {
-            return redirect()->back()->with('fail', 'Something went wrong, failed to register');
+            return redirect()->back()->with('error', 'Something went wrong, failed to register');
         }
     }
 }

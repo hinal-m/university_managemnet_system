@@ -28,7 +28,6 @@ class DashboardController extends Controller
 
     public function chart()
     {
-        // dd(1);
         $college = College::all()->count();
         $student = User::all()->count();
         $admission = Addmission::all()->count();
@@ -37,7 +36,6 @@ class DashboardController extends Controller
             'student' => $student,
             'admission' => $admission
         );
-        // dd($result);
         return response()->json(['data'=> $result]);
     }
 

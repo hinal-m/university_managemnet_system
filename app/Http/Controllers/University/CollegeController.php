@@ -10,6 +10,7 @@ use App\Http\Traits\CollegeTrait;
 use App\Models\College;
 use App\Repositories\CollegeRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CollegeController extends Controller
 {
@@ -22,8 +23,18 @@ class CollegeController extends Controller
 
     public function index(CollegeDataTable $dataTable)
     {
+        // $users = DB::table('colleges')
+        // ->where('name', 'like', 'g%')
+        //     ->selectRaw('colleges.name, count(*) name')
+        //     ->groupBy('colleges.name')
+        //     ->get();
+        // dd($users);
+
+    //     $products = College::select('id', 'name')
+    // ->selectRaw('address - discount_price AS discount')
+    // ->get();
         $college = $this->collegeAll();
-        return $dataTable->render('University.College.index');
+        return $dataTable->render('University.College.index'); 
     }
 
     public function create()

@@ -10,7 +10,7 @@ class CollegeRepository implements CollegeInterface
 {
     public function all()
     {
-        return College::all();
+        // return College::all();
     }
 
     public function store(array $data)

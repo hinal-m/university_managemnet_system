@@ -1,15 +1,21 @@
 <html>
 
 <head>
-    <title>Laravel 8 Phone Number Authentication using Firebase - Tutsmake.com</title>
+    <title>Phone Number Authentication using Firebase In Laravel 8</title>
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Js only -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <h1>Laravel 8 Phone Number Authentication using Firebase - Tutsmake.com</h1>
+        <div class="jumbotron">
+            <div class="container text-center">
+                <p>Phone Number Authentication using Firebase In Laravel 8</p>
+            </div>
+        </div>
+
         <div class="alert alert-danger" id="error" style="display: none;"></div>
         <div class="card">
             <div class="card-header">
@@ -40,16 +46,16 @@
     </div>
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
     <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyBPdVwUIYOY0qRr9kbIMTnxKpFw_nkneYk",
-            authDomain: "itdemo-push-notification.firebaseapp.com",
-            databaseURL: "https://itdemo-push-notification.firebaseio.com",
-            projectId: "itdemo-push-notification",
-            storageBucket: "itdemo-push-notification.appspot.com",
-            messagingSenderId: "257055232313",
-            appId: "1:257055232313:web:3f09127acdda7298dfd8e8",
-            measurementId: "G-VMJ68DFLXL"
+        const firebaseConfig = {
+            apiKey: "AIzaSyB0Gt3ZxDjKrYLNoYLelUtfai92hMZ1kBQ",
+            authDomain: "university-management-sysytem.firebaseapp.com",
+            projectId: "university-management-sysytem",
+            storageBucket: "university-management-sysytem.appspot.com",
+            messagingSenderId: "110871430899",
+            appId: "1:110871430899:web:132b3f5b4f2e2acef5d986",
+            measurementId: "G-DMEVM43GNC"
         };
+
         firebase.initializeApp(firebaseConfig);
     </script>
     <script type="text/javascript">
@@ -63,26 +69,35 @@
         }
 
         function phoneSendAuth() {
+
             var number = $("#number").val();
+
             firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
+
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
                 console.log(coderesult);
+
                 $("#sentSuccess").text("Message Sent Successfully.");
                 $("#sentSuccess").show();
+
             }).catch(function(error) {
                 $("#error").text(error.message);
                 $("#error").show();
             });
+
         }
 
         function codeverify() {
+
             var code = $("#verificationCode").val();
+
             coderesult.confirm(code).then(function(result) {
                 var user = result.user;
-                console.log(user);
+
                 $("#successRegsiter").text("you are register Successfully.");
                 $("#successRegsiter").show();
+
             }).catch(function(error) {
                 $("#error").text(error.message);
                 $("#error").show();
